@@ -9,7 +9,6 @@ const loadEntrancePage = (req, res) => {
 }
 
 
-
 module.exports = {
     loadEntrancePage,
 }
