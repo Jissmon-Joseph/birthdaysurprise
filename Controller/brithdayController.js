@@ -8,7 +8,16 @@ const loadEntrancePage = (req, res) => {
     }
 }
 
+const loadGiftBoxPage = (req, res) => {
+    try {
+        res.render("giftbox");
+    } catch (error) {
+        console.log("Error in load box page", error);
+    }
+}
+
 
 module.exports = {
     loadEntrancePage,
+    loadGiftBoxPage
 }
