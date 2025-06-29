@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -7,9 +7,430 @@
   <link rel="stylesheet" href="/css/gftbox.css" />
 </head>
 <body>
-  <div class="gift-grid" id="giftGrid">
+  <div class="gift-grid" id="giftGrid"> -->
     <!-- JavaScript will auto-generate 21 boxes here -->
-  </div>
-  <script src="/js/giftbox.js"></script>
+  <!-- </div> -->
+  <!-- <script src="/js/giftbox.js"></script> -->
+<!-- </body>
+</html> -->
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>21 Beautiful Surprises 💕</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 3s infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        .container {
+            position: relative;
+            z-index: 2;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            color: white;
+        }
+
+        .header h1 {
+            font-size: 3.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            background: linear-gradient(45deg, #ffd89b, #19547b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+
+        .boxes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .surprise-box {
+            position: relative;
+            width: 100%;
+            height: 180px;
+            background: linear-gradient(145deg, #ffffff, #f0f0f0);
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            box-shadow: 
+                20px 20px 60px #bebebe,
+                -20px -20px 60px #ffffff;
+            overflow: hidden;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .surprise-box:hover {
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 
+                25px 25px 80px #bebebe,
+                -25px -25px 80px #ffffff;
+        }
+
+        .surprise-box.visited {
+            background: linear-gradient(145deg, #e8f5e8, #d4f1d4);
+        }
+
+        .surprise-box.visited .box-content .box-icon {
+            opacity: 1;
+        }
+
+        .surprise-box.visited .box-content .box-text {
+            color: #4a7c59;
+            font-weight: 600;
+        }
+
+        .box-number {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .box-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            width: 80%;
+        }
+
+        .box-icon {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            opacity: 0.7;
+            transition: all 0.3s ease;
+        }
+
+        .box-text {
+            font-size: 0.9rem;
+            color: #666;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .floating-hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 999;
+        }
+
+        .heart {
+            position: absolute;
+            color: #ff69b4;
+            font-size: 20px;
+            animation: float 4s linear infinite;
+            opacity: 0;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .instructions {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            color: white;
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .instructions h3 {
+            margin-bottom: 10px;
+            color: #ffd89b;
+        }
+
+        .instructions code {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 2px 6px;
+            border-radius: 4px;
+            color: #ffd89b;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .boxes-grid {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+                gap: 15px;
+            }
+            
+            .surprise-box {
+                height: 150px;
+            }
+            
+            .instructions {
+                padding: 15px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="stars"></div>
+    <div class="floating-hearts"></div>
+    
+    <div class="container">
+        <div class="header">
+            <h1>✨ 21 Beautiful Surprises ✨</h1>
+            <p>Each box holds a special message just for you... Click to discover the magic! 💕</p>
+        </div>
+
+        <div class="instructions">
+            <h3>🔧 Setup Instructions</h3>
+            <p>Create 21 HTML files named: <code>surprise1.html</code>, <code>surprise2.html</code>, ... <code>surprise21.html</code></p>
+            <p>Each box will link to its corresponding page. Customize the links below if needed!</p>
+        </div>
+
+        <div class="boxes-grid" id="boxesGrid">
+            <!-- Boxes will be generated by JavaScript -->
+        </div>
+    </div>
+
+    <script>
+        // Configuration - Edit these URLs to match your page structure
+        const pageUrls = [
+            'surprise1.html',   // Box 1
+            'surprise2.html',   // Box 2
+            'surprise3.html',   // Box 3
+            'surprise4.html',   // Box 4
+            'surprise5.html',   // Box 5
+            'surprise6.html',   // Box 6
+            'surprise7.html',   // Box 7
+            'surprise8.html',   // Box 8
+            'surprise9.html',   // Box 9
+            'surprise10.html',  // Box 10
+            'surprise11.html',  // Box 11
+            'surprise12.html',  // Box 12
+            'surprise13.html',  // Box 13
+            'surprise14.html',  // Box 14
+            'surprise15.html',  // Box 15
+            'surprise16.html',  // Box 16
+            'surprise17.html',  // Box 17
+            'surprise18.html',  // Box 18
+            'surprise19.html',  // Box 19
+            'surprise20.html',  // Box 20
+            'surprise21.html'   // Box 21
+        ];
+
+        // Box titles for display (optional - you can customize these)
+        const boxTitles = [
+            '💕 You Are My Sunshine',
+            '🌟 My Favorite Memory',
+            '💝 What I Love About You',
+            '🎵 Our Song',
+            '🌹 You\'re Beautiful',
+            '💭 I Think About You',
+            '🌈 You Make Me Better',
+            '⭐ Future Dreams',
+            '💌 Love Letter',
+            '🍀 You\'re My Lucky Charm',
+            '🌸 Spring in My Heart',
+            '💫 Shooting Star Wish',
+            '🎭 You Complete Me',
+            '🌺 Garden of Love',
+            '🎪 Life\'s Adventure',
+            '🕊️ Peace and Joy',
+            '🌙 Moonlight Serenade',
+            '🎨 You\'re Art',
+            '🌊 Ocean of Love',
+            '🦋 Transformation',
+            '🎂 Happy Birthday!'
+        ];
+
+        // Generate stars
+        function createStars() {
+            const starsContainer = document.querySelector('.stars');
+            for (let i = 0; i < 100; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.animationDelay = Math.random() * 3 + 's';
+                starsContainer.appendChild(star);
+            }
+        }
+
+        // Generate surprise boxes with links
+        function createBoxes() {
+            const grid = document.getElementById('boxesGrid');
+            
+            for (let i = 1; i <= 21; i++) {
+                const box = document.createElement('a');
+                box.className = 'surprise-box';
+                box.href = pageUrls[i - 1];
+                box.setAttribute('data-box', i);
+                
+                const boxNumber = document.createElement('div');
+                boxNumber.className = 'box-number';
+                boxNumber.textContent = i;
+                
+                const boxContent = document.createElement('div');
+                boxContent.className = 'box-content';
+                
+                const boxIcon = document.createElement('div');
+                boxIcon.className = 'box-icon';
+                boxIcon.textContent = '🎁';
+                
+                const boxText = document.createElement('div');
+                boxText.className = 'box-text';
+                boxText.textContent = 'Click to open surprise!';
+                
+                boxContent.appendChild(boxIcon);
+                boxContent.appendChild(boxText);
+                box.appendChild(boxNumber);
+                box.appendChild(boxContent);
+                
+                // Add click event for visual feedback and hearts animation
+                box.addEventListener('click', (e) => {
+                    // Create floating hearts animation
+                    createFloatingHearts();
+                    
+                    // Mark as visited (you can remove this if you don't want the visual change)
+                    setTimeout(() => {
+                        box.classList.add('visited');
+                        const icon = box.querySelector('.box-icon');
+                        const text = box.querySelector('.box-text');
+                        icon.textContent = '✨';
+                        text.textContent = 'Opened!';
+                    }, 100);
+                });
+                
+                grid.appendChild(box);
+            }
+        }
+
+        // Create floating hearts animation
+        function createFloatingHearts() {
+            const heartsContainer = document.querySelector('.floating-hearts');
+            
+            for (let i = 0; i < 20; i++) {
+                setTimeout(() => {
+                    const heart = document.createElement('div');
+                    heart.className = 'heart';
+                    heart.textContent = '💕';
+                    heart.style.left = Math.random() * 100 + '%';
+                    heart.style.fontSize = (Math.random() * 10 + 15) + 'px';
+                    
+                    heartsContainer.appendChild(heart);
+                    
+                    setTimeout(() => {
+                        heart.remove();
+                    }, 4000);
+                }, i * 100);
+            }
+        }
+
+        // Check for visited boxes on page load (using localStorage)
+        function checkVisitedBoxes() {
+            const visitedBoxes = JSON.parse(localStorage.getItem('visitedSurprises') || '[]');
+            visitedBoxes.forEach(boxNumber => {
+                const box = document.querySelector(`[data-box="${boxNumber}"]`);
+                if (box) {
+                    box.classList.add('visited');
+                    const icon = box.querySelector('.box-icon');
+                    const text = box.querySelector('.box-text');
+                    icon.textContent = '✨';
+                    text.textContent = 'Opened!';
+                }
+            });
+        }
+
+        // Save visited box
+        function saveVisitedBox(boxNumber) {
+            const visitedBoxes = JSON.parse(localStorage.getItem('visitedSurprises') || '[]');
+            if (!visitedBoxes.includes(boxNumber)) {
+                visitedBoxes.push(boxNumber);
+                localStorage.setItem('visitedSurprises', JSON.stringify(visitedBoxes));
+            }
+        }
+
+        // Initialize everything
+        window.addEventListener('load', () => {
+            createStars();
+            createBoxes();
+            checkVisitedBoxes();
+        });
+    </script>
 </body>
 </html>

@@ -249,3 +249,237 @@ body, html {
 } */
 
 
+
+
+
+/* Video style */
+* {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            overflow-x: hidden;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .video-container {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .background-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 1;
+        }
+
+        /* Curved bottom overlay */
+        .curved-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .curved-overlay::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            clip-path: ellipse(100% 100% at 50% 100%);
+            animation: curveFloat 4s ease-in-out infinite;
+        }
+
+        /* Content overlay */
+        .content-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 3;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .brand-logo {
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            font-weight: bold;
+            color: white;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            letter-spacing: 2px;
+        }
+
+        .main-title {
+            font-size: clamp(2rem, 6vw, 4rem);
+            font-weight: bold;
+            color: white;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            line-height: 1.2;
+            max-width: 800px;
+        }
+
+        .subtitle {
+            font-size: clamp(1rem, 3vw, 1.5rem);
+            color: white;
+            margin-bottom: 40px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+            opacity: 0.9;
+        }
+
+        .cta-button {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+            color: white;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 50px;
+            font-size: clamp(1rem, 2.5vw, 1.2rem);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(255, 107, 107, 0.3);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 35px rgba(255, 107, 107, 0.4);
+            background: linear-gradient(135deg, #ff5252 0%, #d63031 100%);
+        }
+
+        .cta-button:active {
+            transform: translateY(0);
+        }
+
+        /* Background section below video */
+        .background-section {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 80px 20px;
+        }
+
+        .background-content {
+            max-width: 800px;
+            text-align: center;
+            color: white;
+        }
+
+        .background-content h2 {
+            font-size: clamp(2rem, 5vw,
+
+5vw, 3rem);
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .background-content p {
+            font-size: clamp(1.1rem, 2.5vw, 1.3rem);
+            line-height: 1.6;
+            opacity: 0.9;
+        }
+
+        /* Animations */
+        /* @keyframes curveFloat {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .content-overlay {
+            animation: fadeInUp 1s ease-out;
+        } */
+
+        /* @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        } */
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .curved-overlay {
+                height: 150px;
+            }
+            
+            .content-overlay {
+                padding: 15px;
+            }
+            
+            .cta-button {
+                padding: 12px 30px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .curved-overlay {
+                height: 120px;
+            }
+            
+            .main-title {
+                margin-bottom: 20px;
+            }
+            
+            .subtitle {
+                margin-bottom: 30px;
+            }
+            
+            .cta-button {
+                padding: 10px 25px;
+            }
+        }
+
+        /* Landscape orientation adjustments */
+        @media (max-height: 500px) and (orientation: landscape) {
+            .video-container {
+                height: 100vh;
+            }
+            
+            .main-title {
+                font-size: clamp(1.5rem, 4vw, 2.5rem);
+                margin-bottom: 15px;
+            }
+            
+            .subtitle {
+                font-size: clamp(0.9rem, 2vw, 1.2rem);
+                margin-bottom: 20px;
+            }
+            
+            .curved-overlay {
+                height: 100px;
+            }
+        }
