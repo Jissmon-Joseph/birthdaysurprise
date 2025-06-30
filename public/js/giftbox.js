@@ -1,6 +1,6 @@
 (function () {
   const giftGrid = document.getElementById("giftGrid");
-  const startDate = new Date("2025-06-21");
+  const startDate = new Date("2025-07-01");
 
   for (let i = 0; i < 21; i++) {
     const boxDate = new Date(startDate);
