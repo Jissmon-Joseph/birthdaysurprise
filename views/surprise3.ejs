@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pure Connection</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+            position: relative;
+        }
+        /* Animated background elements */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.05;
+        }
+        .floating-heart {
+            position: absolute;
+            color: rgba(255, 255, 255, 0.3);
+            font-size: 1.5rem;
+            animation: floatUp 15s infinite linear;
+            pointer-events: none;
+        }
+        @keyframes floatUp {
+            0% { 
+                transform: translateY(100vh) scale(0.5) rotate(0deg); 
+                opacity: 0; 
+            }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { 
+                transform: translateY(-100px) scale(1.2) rotate(360deg); 
+                opacity: 0; 
+            }
+        }
+        /* Main container */
+        .container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+        }
+        /* Image section - improved sizing to show all content */
+        .image-section {
+            width: auto;
+            max-width: 1200px;
+            aspect-ratio: auto;
+            margin-bottom: 2rem;
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 
+                0 30px 60px rgba(0, 0, 0, 0.4),
+                0 10px 20px rgba(0, 0, 0, 0.2);
+            animation: fadeInScale 2s ease-out;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+        @keyframes fadeInScale {
+            0% { 
+                transform: scale(0.8); 
+                opacity: 0; 
+            }
+            100% { 
+                transform: scale(1); 
+                opacity: 1; 
+            }
+        }
+        .main-image {
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+            object-position: center;
+            border-radius: 20px;
+            transition: transform 0.5s ease;
+            display: block;
+            max-height: 80vh;
+        }
+        .image-section:hover .main-image {
+            transform: scale(1.02);
+        }
+        /* Placeholder for when no image is added */
+        .image-placeholder {
+            width: 100%;
+            height: 400px;
+            background: linear-gradient(45deg, 
+                rgba(255, 255, 255, 0.1), 
+                rgba(255, 255, 255, 0.05));
+            backdrop-filter: blur(10px);
+            border: 2px dashed rgba(255, 255, 255, 0.3);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1.2rem;
+            text-align: center;
+            border-radius: 18px;
+        }
+        .placeholder-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            opacity: 0.6;
+        }
+        /* Content section */
+        .content-section {
+            text-align: center;
+            color: white;
+            max-width: 800px;
+            margin: 0 auto;
+            z-index: 2;
+            position: relative;
+        }
+        .title {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 300;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(45deg, #fff, #f0f0f0, #fff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            animation: titleGlow 3s ease-in-out infinite alternate;
+            letter-spacing: 2px;
+        }
+        @keyframes titleGlow {
+            0% { filter: brightness(1); }
+            100% { filter: brightness(1.2); }
+        }
+        .subtitle {
+            font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+            font-weight: 300;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+            animation: fadeInUp 1.5s ease-out 0.5s both;
+        }
+        @keyframes fadeInUp {
+            0% { 
+                transform: translateY(30px); 
+                opacity: 0; 
+            }
+            100% { 
+                transform: translateY(0); 
+                opacity: 0.9; 
+            }
+        }
+        /* CTA Button */
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24, #ff6b6b);
+            background-size: 200% 200%;
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(238, 90, 36, 0.4);
+            animation: buttonPulse 2s ease-in-out infinite alternate, fadeInUp 1.5s ease-out 1s both;
+            text-transform: uppercase;
+            border: 2px solid transparent;
+        }
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(238, 90, 36, 0.6);
+            background-position: 100% 100%;
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+        @keyframes buttonPulse {
+            0% { box-shadow: 0 8px 25px rgba(238, 90, 36, 0.4); }
+            100% { box-shadow: 0 8px 25px rgba(255, 107, 107, 0.6); }
+        }
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+            background: rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            margin-top: auto;
+        }
+        .social-links {
+            margin-top: 1rem;
+        }
+        .social-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            margin: 0 1rem;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+        .social-links a:hover {
+            color: #ff6b6b;
+            transform: translateY(-2px);
+        }
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            .image-section {
+                width: 95vw;
+                margin-bottom: 1.5rem;
+            }
+            .main-image {
+                max-height: 70vh;
+            }
+            .title {
+                font-size: 2.5rem;
+                margin-bottom: 1rem;
+            }
+            .subtitle {
+                font-size: 1.1rem;
+                margin-bottom: 1.5rem;
+            }
+            .cta-button {
+                padding: 0.8rem 2rem;
+                font-size: 1rem;
+            }
+        }
+        @media (max-width: 480px) {
+            .image-section {
+                width: 98vw;
+            }
+            .main-image {
+                max-height: 60vh;
+            }
+            .title {
+                font-size: 2rem;
+            }
+            .subtitle {
+                font-size: 1rem;
+            }
+        }
+        /* Image overlay for better text contrast */
+        .image-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                to bottom,
+                rgba(0, 0, 0, 0.1) 0%,
+                rgba(0, 0, 0, 0.05) 50%,
+                rgba(0, 0, 0, 0.1) 100%
+            );
+            border-radius: 20px;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated background -->
+    <div class="bg-animation" id="bgAnimation"></div>
+
+    <!-- Main container -->
+    <div class="container">
+        <!-- Image section with improved sizing -->
+        <div class="image-section">
+            <img 
+                src="/asset/longDistencePic.jpg"
+                alt="Pure Connection" 
+                class="main-image"
+                id="mainImage"
+                onerror="this.style.display='none'; document.getElementById('imagePlaceholder').style.display='flex';"
+            >
+            <div class="image-placeholder" id="imagePlaceholder" style="display: none;">
+                <div class="placeholder-icon">🖼</div>
+                <div>Click to upload your image</div>
+                <div style="font-size: 0.9rem; opacity: 0.7; margin-top: 0.5rem;">
+                    JPG, PNG, or GIF up to 10MB
+                </div>
+            </div>
+            <div class="image-overlay"></div>
+        </div>
+
+        <!-- Content section -->
+        <div class="content-section">
+            <h1 class="title">Pure Connection</h1>
+            <p class="subtitle">
+                Experience the beauty of authentic relationships and meaningful connections. 
+                Discover a world where genuine emotions flourish and hearts unite in perfect harmony.
+            </p>
+            <a href="#connect" class="cta-button">Start Your Journey</a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <p>&copy; 2025 Pure Connection. Crafted with love and passion.</p>
+        <div class="social-links">
+            <a href="#" aria-label="Facebook">📘</a>
+            <a href="#" aria-label="Twitter">🐦</a>
+            <a href="#" aria-label="Instagram">📷</a>
+            <a href="#" aria-label="LinkedIn">💼</a>
+        </div>
+    </div>
+
+    <script>
+        // Floating hearts animation
+        function createFloatingHeart() {
+            const heart = document.createElement('div');
+            heart.className = 'floating-heart';
+            heart.innerHTML = '💝';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = (Math.random() * 10 + 10) + 's';
+            heart.style.animationDelay = Math.random() * 5 + 's';
+            
+            document.getElementById('bgAnimation').appendChild(heart);
+            
+            // Remove heart after animation
+            setTimeout(() => {
+                if (heart.parentNode) {
+                    heart.parentNode.removeChild(heart);
+                }
+            }, 20000);
+        }
+
+        // Create hearts periodically
+        setInterval(createFloatingHeart, 3000);
+
+        // Create initial hearts
+        for (let i = 0; i < 5; i++) {
+            setTimeout(createFloatingHeart, i * 1000);
+        }
+
+        // Image upload functionality
+        // document.getElementById('imagePlaceholder').addEventListener('click', function() {
+        //     const input = document.createElement('input');
+        //     input.type = 'file';
+        //     input.accept = 'image/*';
+        //     input.onchange = function(event) {
+        //         const file = event.target.files[0];
+        //         if (file) {
+        //             const reader = new FileReader();
+        //             reader.onload = function(e) {
+        //                 const img = document.getElementById('mainImage');
+        //                 img.src = e.target.result;
+        //                 img.style.display = 'block';
+        //                 document.getElementById('imagePlaceholder').style.display = 'none';
+        //             };
+        //             reader.readAsDataURL(file);
+        //         }
+        //     };
+        //     input.click();
+        // });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add subtle parallax effect
+        window.addEventListener('scroll', function() {
+            const scrolled = window.pageYOffset;
+            const parallax = document.querySelector('.image-section');
+            const speed = scrolled * 0.2;
+            parallax.style.transform = translateY(`${speed}px`);
+        });
+    </script>
+</body>
+</html>
