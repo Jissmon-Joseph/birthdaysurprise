@@ -1,13 +1,4 @@
 
-
-const loadEntrancePage = (req, res) => {
-    try {
-        res.render("entrance")
-    } catch (err) {
-        console.log("Error in load entrance:", err);
-    }
-}
-
 const loadGiftBoxPage = (req, res) => {
     try {
         res.render("giftbox");
@@ -190,4 +181,4 @@ module.exports = {
     boxOpen,
     getOpenedBoxes,
     resetBoxes
-}
+};
