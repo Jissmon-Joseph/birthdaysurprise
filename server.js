@@ -4,6 +4,9 @@ require("dotenv").config();
 const userRouter = require("./router/birthdayRouter");
 const path = require("path");
 
+app.use(express.json());    //for convert form data
+app.use(express.urlencoded({extended: true}));    //convert urls string
+
 app.use("/api/home", userRouter);
 
 app.set("view engine", "ejs");

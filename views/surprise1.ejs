@@ -1,0 +1,242 @@
+<!DOC<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>First Chat - Our Beginning</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Caveat:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .main-title {
+            font-family: 'Caveat', cursive;
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 600;
+            color: #ffffff;
+            text-align: center;
+            margin-bottom: 40px;
+            text-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            letter-spacing: 2px;
+        }
+
+        .chat-container {
+            background: #ffffff;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            width: 100%;
+            max-width: 400px;
+            margin-bottom: 30px;
+        }
+
+        .chat-header {
+            background: linear-gradient(45deg, #405de6, #5851db, #833ab4, #c13584, #e1306c, #fd1d1d);
+            padding: 15px 20px;
+            color: white;
+            text-align: center;
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+        .chat-messages {
+            padding: 20px;
+            background: #fafafa;
+            min-height: 200px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .message {
+            display: flex;
+            align-items: flex-end;
+            gap: 8px;
+        }
+
+        .message.sent {
+            justify-content: flex-end;
+        }
+
+        .message.received {
+            justify-content: flex-start;
+        }
+
+        .message-bubble {
+            max-width: 70%;
+            padding: 12px 16px;
+            border-radius: 18px;
+            font-size: 14px;
+            line-height: 1.4;
+            position: relative;
+        }
+
+        .message.sent .message-bubble {
+            background: #007bff;
+            color: white;
+            border-bottom-right-radius: 4px;
+        }
+
+        .message.received .message-bubble {
+            background: #e4e6ea;
+            color: #050505;
+            border-bottom-left-radius: 4px;
+        }
+
+        .message-time {
+            font-size: 11px;
+            color: #8e8e93;
+            margin-top: 5px;
+            text-align: center;
+        }
+
+        .description-container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            max-width: 600px;
+            width: 100%;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .description-text {
+            font-family: 'Caveat', cursive;
+            font-size: clamp(1.3rem, 3vw, 1.8rem);
+            line-height: 1.6;
+            color: #2c3e50;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        .highlight {
+            color: #e74c3c;
+            font-weight: 600;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            body {
+                padding: 30px 15px;
+            }
+            
+            .main-title {
+                margin-bottom: 30px;
+            }
+            
+            .chat-container {
+                max-width: 350px;
+            }
+            
+            .description-container {
+                padding: 25px 20px;
+            }
+            
+            .description-text {
+                font-size: 1.4rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 20px 10px;
+            }
+            
+            .chat-container {
+                max-width: 320px;
+            }
+            
+            .chat-messages {
+                padding: 15px;
+                min-height: 180px;
+            }
+            
+            .description-container {
+                padding: 20px 15px;
+            }
+            
+            .description-text {
+                font-size: 1.3rem;
+                line-height: 1.5;
+            }
+        }
+
+        /* Animation */
+        .chat-container {
+            animation: slideUp 0.6s ease-out;
+        }
+
+        .description-container {
+            animation: fadeIn 0.8s ease-out 0.3s both;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1 class="main-title">First Chat</h1>
+    
+    <div class="chat-container">
+        <div class="chat-header">
+            Instagram Direct
+        </div>
+        <div class="chat-messages">
+            <div class="message received">
+                <div class="message-bubble">
+                    Hi
+                </div>
+            </div>
+
+<div class="message-time">1:34 AM</div>
+            
+            <div class="message sent">
+                <div class="message-bubble">
+                    Hello
+                </div>
+            </div>
+            <div class="message-time">1:35 AM</div>
+        </div>
+    </div>
+    
+    <div class="description-container">
+        <p class="description-text">
+            <span class="highlight">Baby</span>... do you remember how we introduced to each other? The <span class="highlight">Call of Duty</span> sessions... just a random invite from me... while we were playing in the group... you accepted and from a <span class="highlight">random teammate</span>... to the <span class="highlight">integral part of me</span>... and the journey continues ❤
+        </p>
+    </div>
+</body>
+</html>
