@@ -1,7 +1,14 @@
-@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Funnel+Sans:ital,wght@0,300..800;1,300..800&family=Mona+Sans:ital,wght@0,200..900;1,200..900&display=swap'); 
- 
- 
- :root{
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Everyday HEROINE - Photo Collage</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Funnel+Sans:ital,wght@0,300..800;1,300..800&family=Mona+Sans:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
+    <!-- <style>
+        :root{
             --first-color: hsl(82,60%,28%);
             --title-color:hsl(0,0%,15%);
             --text-color:hsl(0,0%,35%);
@@ -30,7 +37,6 @@
 
         body{
             font-family: var(--body-font);
-              /* font-family: "Mona Sans", sans-serif; */
             background-color: white;
             color: var(--text-color);
             line-height: 1.6;
@@ -54,20 +60,14 @@
             font-weight: 700;
             margin-bottom: 0.5rem;
             color: var(--title-color);
-            /* font-family: Arial, Helvetica, sans-serif; */
-             font-family: "Dancing Script", cursive;  
-    
         }
 
         .main-subtitle {
-            font-size: 2rem;
+            font-size: 1.1rem;
             color: var(--text-color);
             font-weight: 300;
-            /* font-style: italic; */
-          font-family: "Dancing Script", cursive;    
+            font-style: italic;
         }
-
-
 
         /* Cute collage layout - asymmetrical grid */
         .container{
@@ -134,11 +134,9 @@
 
         .card__data{
             width: calc(100% - 2rem);
-            /* background-color: var(--container-color); */
-            background-color:pink;
+            background-color: var(--container-color);
             padding: 1.5rem 2rem;
-           box-shadow: 0 8px 24px hsla(0,0%,0%,.15);
-            font-family: "Dancing Script", cursive;  
+            box-shadow: 0 8px 24px hsla(0,0%,0%,.15);
             border-radius: 1rem;
             position: absolute;
             bottom:-9rem;
@@ -332,3 +330,72 @@
                 grid-row: 4 / 5;
             }
         }
+    </style> -->
+</head>
+<body>
+    <!-- Simple Header -->
+    <header class="main-header">
+        <h1 class="main-title">MY EVERYDAY HEROINE</h1>
+        <p class="main-subtitle">little shades of you</p>
+    </header>
+
+    <!-- Photo Collage Container -->
+    <div class="container">
+        <div class="card__container">
+            <article class="card__article">
+                <img src="/asset/gridImages/fav.jpg" alt="Portrait Version 1" class="card__img">
+                <div class="card__data">
+                    <span class="card__description">Girl in Saree</span>
+                    <h2 class="card__title">Classic Charm</h2>
+                    <!-- <a href="#" class="card__button">read more</a> -->
+                </div>
+            </article>
+
+            <article class="card__article">
+                <img src="/asset/gridImages/Possess.jpg" alt="Portrait Version 2" class="card__img">
+                <div class="card__data">
+                    <span class="card__description">My Posse Lady</span>
+                    <h2 class="card__title">in love with lens</h2>
+                    <!-- <a href="#" class="card__button">read more</a> -->
+                </div>
+            </article>
+
+            <article class="card__article">
+                <img src="/asset/gridImages/Party.jpg" alt="Portrait Version 3" class="card__img">
+                <div class="card__data">
+                    <span class="card__description">Party Queen</span>
+                    <h2 class="card__title">Outdancess DJ sometimes</h2>
+                    <!-- <a href="#" class="card__button">read more</a> -->
+                </div>
+            </article>
+
+            <article class="card__article">
+                <img src="/asset/gridImages/Rider.jpg" alt="Portrait Version 4" class="card__img">
+                <div class="card__data">
+                    <span class="card__description">Rider mode</span>
+                    <h2 class="card__title">Chase Dreams</h2>
+                    <!-- <a href="#" class="card__button">Helmet hair..Dont care</a> -->
+                </div>
+            </article>
+
+            <article class="card__article">
+                <img src="/asset/gridImages/Office.jpg" alt="Portrait Version 5" class="card__img">
+                <div class="card__data">
+                    <span class="card__description"> Office Boss</span>
+                    <h2 class="card__title">Work Mode on </h2>
+                    <!-- <a href="#" class="card__button">read more</a> -->
+                </div>
+            </article>
+
+            <article class="card__article">
+                <img src="/asset/gridImages/Wanderlust.jpg" alt="Portrait Version 6" class="card__img">
+                <div class="card__data">
+                    <span class="card__description">My Wanderlust</span>
+                    <h2 class="card__title">Lost in Places</h2>
+                    <!-- <a href="#" class="card__button">read more</a> -->
+                </div>
+            </article>
+        </div>
+    </div>
+</body>
+</html>
