@@ -9,9 +9,9 @@ router.get("/giftbox", birthdatController.loadGiftBoxPage);
 
 router.post("/box-opened", birthdatController.boxOpen);
 
-router.get('/api/home/opened-boxes', birthdatController.getOpenedBoxes);
+router.get('/opened-boxes', birthdatController.getOpenedBoxes);
 
-router.post('/api/home/reset-boxes', birthdatController.resetBoxes);
+router.post('/reset-boxes', birthdatController.resetBoxes);
 
 // Individual surprise page routes
 router.get('/surprise/1', (req, res) => {

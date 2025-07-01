@@ -7,7 +7,7 @@ const path = require("path");
 app.use(express.json());    //for convert form data
 app.use(express.urlencoded({extended: true}));    //convert urls string
 
-app.use("/api/home", userRouter);
+app.use("/", userRouter);
 
 app.set("view engine", "ejs");
 
@@ -20,5 +20,5 @@ app.use(express.static(path.join(__dirname, "public")));
 const PORT = process.env.PORT;
 app.listen(PORT, () => {
     console.log("Server running...");
-    console.log("http://localhost:3000/api/home/");
+    console.log("http://localhost:3000");
 });
