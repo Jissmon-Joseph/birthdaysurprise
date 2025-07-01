@@ -330,14 +330,15 @@
                     box.classList.remove('loading');
 
                     // Show success message
-                    Swal.fire({
-                        position: "top-end",
-                        icon: "success",
-                        title: result.message || 'Box opened successfully!',
-                        showConfirmButton: false,
-                        timer: 1500,
-                    });
-
+                   Swal.fire({
+          toast: true,
+          position: 'top-end',
+          icon: 'success',
+          title:result.message,
+          showConfirmButton: false,
+          timer: 3000,
+          timerProgressBar: true,
+        });
                     // Redirect to surprise page
                     setTimeout(() => {
                         window.location.href = pageUrls[boxNumber - 1];
@@ -346,13 +347,15 @@
                 } else {
                     // Backend returned error
                     box.classList.remove('loading');
-                    Swal.fire({
-                        position: "top-end",
-                        icon: "error",
-                        title: result.message || 'Something went wrong',
-                        showConfirmButton: false,
-                        timer: 3000
-                    });
+                         Swal.fire({
+          toast: true,
+          position: 'top-end',
+          icon: 'error',
+          title:result.message ,
+          showConfirmButton: false,
+          timer: 3000,
+          timerProgressBar: true,
+        });
                 }
 
             } catch (error) {
@@ -364,7 +367,7 @@
                     icon: "warning",
                     title: 'Connection issue, but you can still continue!',
                     showConfirmButton: false,
-                    timer: 2000
+                    timer: 3000
                 });
 
                 // Still allow to continue even if backend fails

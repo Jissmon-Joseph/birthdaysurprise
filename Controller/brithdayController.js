@@ -73,7 +73,7 @@ const loadGiftBoxPage = (req, res) => {
                 // 403 Forbidden is a good status code for a rule violation
                 return res.status(403).json({
                     status: false,
-                    message: `Whoops! You need to open the boxes in order. Please open box ${expectedBoxNumber} first. ✨`
+                    message: `Baby..You have to open the box in order...Please open box ${expectedBoxNumber} first. ✨`
                 });
             }
             // ==========================================================
@@ -89,13 +89,13 @@ const loadGiftBoxPage = (req, res) => {
                 const lastOpenedDate = getUTCDateString(new Date(lastOpenedBox.openedAt));
                 const todayDate = getUTCDateString(new Date());
 
-                // if (lastOpenedDate === todayDate) {
-                //     console.log(`🚫 Blocked: A box was already opened today (${lastOpenedDate}).`);
-                //     return res.status(429).json({
-                //         status: false,
-                //         message: "You've already opened a surprise today! Please come back tomorrow for the next one. 💕",
-                //     });
-                // }
+                if (lastOpenedDate === todayDate) {
+                    console.log(`🚫 Blocked: A box was already opened today (${lastOpenedDate}).`);
+                    return res.status(429).json({
+                        status: false,
+                        message: "Come back next day..Love you lots baby 💕",
+                    });
+                }
             }
             
             // If all checks pass, create the new box data

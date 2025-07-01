@@ -13,7 +13,7 @@
 
         body {
             font-family: 'Georgia', serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                background: linear-gradient(135deg, rgba(185, 176, 178, 0.678) 0%, rgb(19, 35, 45) 100%);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
@@ -207,7 +207,7 @@
         
         <div class="image-container">
             <!-- Replace 'your-image.jpg' with the path to your image -->
-            <img src="https://images.squarespace-cdn.com/content/v1/5519ab2ee4b02a4410b6a7c6/1573572780880-TNGN7R4EX4N141SBXP50/beautiful-hands-heart-5390.jpg" alt="Love Photo" class="background-image">
+            <img src="/asset/IMG_20250630_171927.jpg" alt="Love Photo" class="background-image">
             
             <div class="text-overlay" id="textOverlay">
                 <div class="reason-text" id="reasonText"></div>
@@ -249,11 +249,11 @@
         
         // Video content configuration
         const reasons = [
-            { title: "Your Beautiful Smile", detail: "It lights up my entire world" },
-            { title: "Your Kind Heart", detail: "You care for everyone around you" },
-            { title: "Your Amazing Laugh", detail: "It's the most beautiful sound" },
-            { title: "Your Intelligence", detail: "You inspire me every day" },
-            { title: "Just Being You", detail: "Perfect in every way" }
+            // { title: "Your Beautiful Smile", detail: "It lights up my entire world" },
+            // { title: "Your Kind Heart", detail: "You care for everyone around you" },
+            // { title: "Your Amazing Laugh", detail: "It's the most beautiful sound" },
+            // { title: "Your Intelligence", detail: "You inspire me every day" },
+            { title: "Why do I need reason to love you?"}
         ];
         
         function createHeart() {
@@ -277,29 +277,31 @@
             let currentReason = 0;
             
             function showNextReason() {
+
                 if (currentReason < reasons.length) {
                     const reason = reasons[currentReason];
-                    
-                    // Reset and show title
-                    reasonText.textContent = reason.title;
-                    reasonText.style.animation = 'slideInFade 0.5s ease-out forwards';
-                    
                     setTimeout(() => {
-                        // Show detail
-                        reasonDetail.textContent = reason.detail;
-                        reasonDetail.style.animation = 'slideInFade 0.5s ease-out forwards';
+                        // Reset and show title
+                        reasonText.textContent = reason.title;
+                        reasonText.style.animation = 'slideInFade 0.5s ease-out forwards';
                         
                         setTimeout(() => {
-                            // Hide both
-                            reasonText.style.animation = '';
-                            reasonDetail.style.animation = '';
-                            reasonText.style.opacity = '0';
-                            reasonDetail.style.opacity = '0';
+                            // Show detail
+                            reasonDetail.textContent = reason.detail;
+                            reasonDetail.style.animation = 'slideInFade 0.5s ease-out forwards';
                             
-                            currentReason++;
-                            setTimeout(showNextReason, 500);
-                        }, 1500);
-                    }, 500);
+                            setTimeout(() => {
+                                // Hide both
+                                reasonText.style.animation = '';
+                                reasonDetail.style.animation = '';
+                                reasonText.style.opacity = '0';
+                                reasonDetail.style.opacity = '0';
+                                
+                                currentReason++;
+                                setTimeout(showNextReason, 500);
+                            }, 1500);
+                        }, 500);
+                    }, 4000);
                 } else {
                     // Show final message
                     finalMessage.innerHTML = 'I Love You Baby<br>Just The Way You Are';
