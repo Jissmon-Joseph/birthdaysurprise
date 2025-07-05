@@ -14,6 +14,7 @@ const loadGiftBoxPage = (req, res) => {
     }
 };
 
+// new
 let openedBoxes = [];
 
 // Helper function to get the date part (YYYY-MM-DD) from a Date object in UTC
