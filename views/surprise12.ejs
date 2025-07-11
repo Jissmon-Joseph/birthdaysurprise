@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Universe According to Us</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: radial-gradient(ellipse at center, #1a1a2e 0%, #16213e 50%, #0f0f2a 100%);
+            font-family: 'Arial', sans-serif;
+            overflow: hidden;
+            height: 100vh;
+            position: relative;
+        }
+
+        /* Starfield Background */
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 3s infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        /* Universe Container */
+        .universe {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Center - Jyoti */
+        .center-sun {
+            position: absolute;
+            width: 120px;
+            height: 120px;
+            background: radial-gradient(circle, #ffd700 0%, #ff6b35 50%, #ff1744 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: glow 2s ease-in-out infinite alternate;
+            box-shadow: 0 0 30px #ffd700, 0 0 50px #ff6b35;
+            cursor: pointer;
+            z-index: 100;
+            transition: transform 0.3s ease;
+        }
+
+        .center-sun:hover {
+            transform: scale(1.1);
+        }
+
+        .center-text {
+            color: white;
+            font-weight: bold;
+            text-align: center;
+            font-size: 14px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+        }
+
+        @keyframes glow {
+            from { box-shadow: 0 0 30px #ffd700, 0 0 50px #ff6b35; }
+            to { box-shadow: 0 0 40px #ffd700, 0 0 70px #ff6b35, 0 0 90px #ff1744; }
+        }
+
+        /* Orbits - Just visual guides */
+        .orbit {
+            position: absolute;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .orbit1 { width: 300px; height: 300px; }
+        .orbit2 { width: 450px; height: 450px; }
+        .orbit3 { width: 600px; height: 600px; }
+        .orbit4 { width: 750px; height: 750px; }
+        .orbit5 { width: 900px; height: 900px; }
+
+        /* Planet Container for rotation */
+        .planet-container {
+            position: absolute;
+            animation: rotate linear infinite;
+            pointer-events: none;
+        }
+
+        .planet-container1 { 
+            width: 300px; 
+            height: 300px; 
+            animation-duration: 20s; 
+        }
+        .planet-container2 { 
+            width: 450px; 
+            height: 450px; 
+            animation-duration: 30s; 
+        }
+        .planet-container3 { 
+            width: 600px; 
+            height: 600px; 
+            animation-duration: 40s; 
+        }
+        .planet-container4 { 
+            width: 750px; 
+            height: 750px; 
+            animation-duration: 50s; 
+        }
+        .planet-container5 { 
+            width: 900px; 
+            height: 900px; 
+            animation-duration: 60s; 
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Planets */
+        .planet {
+            position: absolute;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            text-align: center;
+            font-size: 10px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+            /* Counter-rotate to keep text upright */
+            animation: counterRotate linear infinite;
+            pointer-events: auto;
+            z-index: 10;
+        }
+
+        /* Counter-rotation animations */
+        .planet-container1 .planet { animation-duration: 20s; }
+        .planet-container2 .planet { animation-duration: 30s; }
+        .planet-container3 .planet { animation-duration: 40s; }
+        .planet-container4 .planet { animation-duration: 50s; }
+        .planet-container5 .planet { animation-duration: 60s; }
+
+        @keyframes counterRotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(-360deg); }
+        }
+
+        .planet:hover {
+            transform: scale(1.2);
+            z-index: 50;
+            animation-play-state: paused;
+        }
+
+        /* Individual Planets */
+        .planet1 {
+            width: 60px;
+            height: 60px;
+            background: radial-gradient(circle, #ff69b4 0%, #ff1493 100%);
+            top: -30px;
+            left: calc(50% - 30px);
+            box-shadow: 0 0 15px #ff69b4;
+        }
+
+        .planet2 {
+            width: 70px;
+            height: 70px;
+            background: radial-gradient(circle, #87ceeb 0%, #4169e1 100%);
+            top: calc(50% - 35px);
+            right: -35px;
+            box-shadow: 0 0 15px #87ceeb;
+        }
+
+        .planet3 {
+            width: 65px;
+            height: 65px;
+            background: radial-gradient(circle, #98fb98 0%, #32cd32 100%);
+            bottom: -32.5px;
+            left: calc(50% - 32.5px);
+            box-shadow: 0 0 15px #98fb98;
+        }
+
+        .planet4 {
+            width: 75px;
+            height: 75px;
+            background: radial-gradient(circle, #dda0dd 0%, #9370db 100%);
+            top: calc(50% - 37.5px);
+            left: -37.5px;
+            box-shadow: 0 0 15px #dda0dd;
+        }
+
+        .planet5 {
+            width: 55px;
+            height: 55px;
+            background: radial-gradient(circle, #ffa500 0%, #ff4500 100%);
+            top: -27.5px;
+            right: 30%;
+            box-shadow: 0 0 15px #ffa500;
+        }
+
+        /* Info Panel */
+        .info-panel {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            background: rgba(0, 0, 0, 0.9);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            max-width: 400px;
+            text-align: center;
+            z-index: 200;
+            border: 2px solid #ffd700;
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+            transition: transform 0.3s ease;
+        }
+
+        .info-panel.show {
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .info-panel h2 {
+            color: #ffd700;
+            margin-bottom: 15px;
+            font-size: 24px;
+        }
+
+        .info-panel p {
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            background: none;
+            border: none;
+            color: #ffd700;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        /* Title */
+        .title {
+            position: absolute;
+            top: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #ffd700;
+            font-size: 28px;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+            text-align: center;
+        }
+
+        /* Music Controls */
+        .music-controls {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 300;
+        }
+
+        .music-btn {
+            background: rgba(255, 215, 0, 0.2);
+            border: 2px solid #ffd700;
+            color: #ffd700;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .music-btn:hover {
+            background: rgba(255, 215, 0, 0.4);
+            transform: scale(1.05);
+        }
+
+        /* Instructions */
+        .instructions {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 14px;
+        }
+
+        /* Constellation Lines */
+        .constellation-line {
+            position: absolute;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.3), transparent);
+            transform-origin: left center;
+            pointer-events: none;
+            animation: shimmer 4s ease-in-out infinite;
+        }
+
+        @keyframes shimmer {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.8; }
+        }
+
+        @keyframes shootingStar {
+            from {
+                transform: translateX(0) translateY(0);
+                opacity: 1;
+            }
+            to {
+                transform: translateX(100vw) translateY(50vh);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Starfield -->
+    <div class="stars"></div>
+
+    <!-- Title -->
+    <div class="title">UNIVERSE I LIVE ❤️</div>
+
+    <!-- Universe Container -->
+    <div class="universe">
+        <!-- Orbits (Visual guides only) -->
+        <div class="orbit orbit1"></div>
+        <div class="orbit orbit2"></div>
+        <div class="orbit orbit3"></div>
+        <div class="orbit orbit4"></div>
+        <div class="orbit orbit5"></div>
+
+        <!-- Center Sun (Jyoti) -->
+        <div class="center-sun" onclick="showInfo('center')">
+            <div class="center-text">YOU<br></div>
+        </div>
+
+        <!-- Planet Containers with Rotation -->
+        <div class="planet-container planet-container1">
+            <div class="planet planet1" onclick="showInfo('love')">
+                💕<br>Love<br>
+            </div>
+        </div>
+
+        <div class="planet-container planet-container2">
+            <div class="planet planet2" onclick="showInfo('dreams')">
+                🌟<br>Future
+            </div>
+        </div>
+
+        <div class="planet-container planet-container3">
+            <div class="planet planet3" onclick="showInfo('memories')">
+                📸<br>Memories
+            </div>
+        </div>
+
+        <div class="planet-container planet-container4">
+            <div class="planet planet4" onclick="showInfo('laughter')">
+                🥰<br>Your Smile
+            </div>
+        </div>
+
+        <div class="planet-container planet-container5">
+            <div class="planet planet5" onclick="showInfo('support')">
+                🤗<br>Support
+            </div>
+        </div>
+    </div>
+
+    <!-- Info Panel -->
+    <div class="info-panel" id="infoPanel">
+        <button class="close-btn" onclick="closeInfo()">×</button>
+        <div id="infoContent"></div>
+    </div>
+
+    <!-- Music Controls -->
+    <div class="music-controls">
+        <!-- <button class="music-btn" onclick="toggleMusic()" id="musicBtn">🎵 Play Music</button> -->
+        <!-- ADD YOUR BACKGROUND MUSIC HERE -->
+        <!-- Replace 'your-music-file.mp3' with your actual music file URL -->
+        <audio id="bgMusic" loop>
+            <!-- <source src="your-music-file.mp3" type="audio/mpeg"> -->
+            <!-- You can add multiple sources for different formats -->
+            <!-- <source src="your-music-file.ogg" type="audio/ogg"> -->
+        </audio>
+    </div>
+
+    <!-- Instructions -->
+    <div class="instructions">
+        Click on any planets to explore our universe 🌌
+    </div>
+
+    <script>
+        // Create starfield
+        function createStars() {
+            const starsContainer = document.querySelector('.stars');
+            const numStars = 200;
+            
+            for (let i = 0; i < numStars; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.width = Math.random() * 3 + 1 + 'px';
+                star.style.height = star.style.width;
+                star.style.animationDelay = Math.random() * 3 + 's';
+                starsContainer.appendChild(star);
+            }
+        }
+
+        // Planet information
+        const planetInfo = {
+            center: {
+                title: "💖 Jyoti - The Center of My Universe",
+                content: `
+                    <p>You are the center around which my entire world revolves. </p>
+                    
+                    <p><em>" you are my everything, my reason to believe in love, and my home." - Jissmon</em></p>
+                `
+            },
+            love: {
+                title: "💕 Planet of Pure Love",
+                content: `
+                    <p>I am the happiest person for you always and more than anyone or anything i love you</p>
+                    
+                    
+                    <p><em>"and it would be same everytime"</em></p>
+                `
+            },
+            dreams: {
+                title: "🌟Dreams",
+                content: `
+                    <p>You are the one who makes me to see dreams..you taught me to follow that,to find the purpose of life</p>
+                    <p><em>"Now i understood my only purpose in this life is to live with you</em></p>
+                `
+            },
+            memories: {
+                title: "Memories",
+                content: `
+                    <p>I remember every little things that we shared..for me each moments with you is immortal.. </p>
+                    <p><em>"You The treasure I keep close to my heart."</em></p>
+                `
+            },
+            laughter: {
+                title: "🥰 Life",
+                content: `
+                    <p>The only thing i am concerned in this world now is just your smile and happiness..Where ever you are i just need you to be happy,,or kuch nai chahihye mujhe..</p>
+                    
+                    <p><em>"Your smile is the most beautiful visual in my universe."</em></p>
+                `
+            },
+            support: {
+                title: "🤗 Support ",
+                content: `
+                    <p>You are the inregral part of me already..and you know that as well..I would be the biggest cheer leader for you everytime..and the shoulder to lie on as well</p>
+                   
+                    <p><em>"With you by my side, I can conquer any challenge the world throws at us."</em></p>
+                `
+            }
+        };
+
+        // Show planet information
+        function showInfo(planet) {
+            const panel = document.getElementById('infoPanel');
+            const content = document.getElementById('infoContent');
+            const info = planetInfo[planet];
+            
+            content.innerHTML = `<h2>${info.title}</h2>${info.content}`;
+            panel.classList.add('show');
+        }
+
+        // Close information panel
+        function closeInfo() {
+            document.getElementById('infoPanel').classList.remove('show');
+        }
+
+        // Music controls
+        let musicPlaying = false;
+        const bgMusic = document.getElementById('bgMusic');
+        const musicBtn = document.getElementById('musicBtn');
+
+        function toggleMusic() {
+            if (!musicPlaying) {
+                bgMusic.play().catch(e => {
+                    console.log('Music play failed:', e);
+                    alert('Please add your music file to enable background music!');
+                });
+                musicBtn.textContent = '🎵 Pause Music';
+                musicPlaying = true;
+            } else {
+                bgMusic.pause();
+                musicBtn.textContent = '🎵 Play Music';
+                musicPlaying = false;
+            }
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            createStars();
+            
+            // Close info panel when clicking outside
+            document.addEventListener('click', function(e) {
+                const panel = document.getElementById('infoPanel');
+                if (e.target === panel) {
+                    closeInfo();
+                }
+            });
+        });
+
+        // Create shooting stars occasionally
+        function createShootingStar() {
+            const shootingStar = document.createElement('div');
+            shootingStar.style.position = 'fixed';
+            shootingStar.style.width = '2px';
+            shootingStar.style.height = '2px';
+            shootingStar.style.background = 'white';
+            shootingStar.style.borderRadius = '50%';
+            shootingStar.style.top = Math.random() * 50 + '%';
+            shootingStar.style.left = '-10px';
+            shootingStar.style.boxShadow = '0 0 10px white';
+            shootingStar.style.animation = 'shootingStar 3s linear';
+            shootingStar.style.pointerEvents = 'none';
+            
+            document.body.appendChild(shootingStar);
+            
+            setTimeout(() => {
+                shootingStar.remove();
+            }, 3000);
+        }
+
+        // Create shooting stars periodically
+        setInterval(createShootingStar, 8000);
+    </script>
+</body>
+</html>

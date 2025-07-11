@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>From J to I - The Journey with You</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            min-height: 100vh;
+            background: linear-gradient(135deg, 
+                #FFD700 0%, 
+                #FFA500 25%, 
+                #FF6347 50%, 
+                #FF1493 75%, 
+                #8A2BE2 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 8s ease infinite;
+            overflow-x: hidden;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .main-title {
+            font-size: 3.5rem;
+            font-weight: bold;
+            color: #FFFFFF;
+            text-shadow: 
+                0 0 10px rgba(255, 255, 255, 0.8),
+                0 0 20px rgba(255, 215, 0, 0.6),
+                0 0 30px rgba(255, 165, 0, 0.4);
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+            animation: titleGlow 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes titleGlow {
+            from {
+                text-shadow: 
+                    0 0 10px rgba(255, 255, 255, 0.8),
+                    0 0 20px rgba(255, 215, 0, 0.6),
+                    0 0 30px rgba(255, 165, 0, 0.4);
+            }
+            to {
+                text-shadow: 
+                    0 0 20px rgba(255, 255, 255, 1),
+                    0 0 30px rgba(255, 215, 0, 0.8),
+                    0 0 40px rgba(255, 165, 0, 0.6);
+            }
+        }
+
+        .content-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+            margin-top: 40px;
+        }
+
+        .letter-display {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .letter-container {
+            position: relative;
+            width: 300px;
+            height: 400px;
+            background: linear-gradient(45deg, 
+                rgba(255, 255, 255, 0.1) 0%,
+                rgba(255, 215, 0, 0.2) 50%,
+                rgba(255, 165, 0, 0.1) 100%);
+            border-radius: 20px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.3),
+                inset 0 0 20px rgba(255, 255, 255, 0.2);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .profile-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 20px;
+            opacity: 0.95;
+            transition: opacity 0.3s ease;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(2deg); }
+        }
+
+        .letter-i {
+            font-size: 12rem;
+            font-weight: bold;
+            color: #FFFFFF;
+            text-shadow: 
+                0 0 20px rgba(255, 255, 255, 1),
+                0 0 40px rgba(255, 215, 0, 0.8),
+                0 0 60px rgba(255, 165, 0, 0.6),
+                0 0 80px rgba(255, 20, 147, 0.4);
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation: letterPulse 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes letterPulse {
+            from {
+                text-shadow: 
+                    0 0 20px rgba(255, 255, 255, 1),
+                    0 0 40px rgba(255, 215, 0, 0.8),
+                    0 0 60px rgba(255, 165, 0, 0.6),
+                    0 0 80px rgba(255, 20, 147, 0.4);
+            }
+            to {
+                text-shadow: 
+                    0 0 30px rgba(255, 255, 255, 1),
+                    0 0 50px rgba(255, 215, 0, 1),
+                    0 0 70px rgba(255, 165, 0, 0.8),
+                    0 0 90px rgba(255, 20, 147, 0.6);
+            }
+        }
+
+        .text-content {
+            background: linear-gradient(135deg, 
+                rgba(255, 255, 255, 0.15) 0%,
+                rgba(255, 215, 0, 0.1) 50%,
+                rgba(255, 165, 0, 0.05) 100%);
+            padding: 40px;
+            border-radius: 20px;
+            backdrop-filter: blur(15px);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.2),
+                inset 0 0 20px rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Large background letter I - similar to J in second code */
+        .text-content::before {
+            content: 'I';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 25rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, #ffd700, #ff6b6b, #4ecdc4, #45b7d1);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent;
+            opacity: 0.25;
+            z-index: 1;
+            animation: gradientShiftI 4s ease-in-out infinite, letterFloatI 8s ease-in-out infinite;
+            pointer-events: none;
+            filter: drop-shadow(0 0 30px rgba(255, 215, 0, 0.5)) 
+                    drop-shadow(0 0 50px rgba(255, 105, 180, 0.4))
+                    drop-shadow(0 0 70px rgba(78, 205, 196, 0.3));
+        }
+
+        @keyframes gradientShiftI {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        @keyframes letterFloatI {
+            0%, 100% { transform: translate(-50%, -50%) rotate(0deg) scale(1); }
+            25% { transform: translate(-50%, -50%) rotate(1deg) scale(1.02); }
+            50% { transform: translate(-50%, -50%) rotate(-1deg) scale(0.98); }
+            75% { transform: translate(-50%, -50%) rotate(0.5deg) scale(1.01); }
+        }
+
+        .text-content::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, 
+                transparent 40%,
+                rgba(255, 255, 255, 0.1) 50%,
+                transparent 60%);
+            animation: shimmer 4s ease-in-out infinite;
+            z-index: 0;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+
+        .description {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: #FFFFFF;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            position: relative;
+            z-index: 2;
+        }
+
+        .description strong {
+            color: #FFD700;
+            text-shadow: 
+                0 0 10px rgba(255, 215, 0, 0.8),
+                0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .inner-light-i {
+            font-size: 2rem;
+            color: #FFD700;
+            text-shadow: 
+                0 0 10px rgba(255, 215, 0, 1),
+                0 0 20px rgba(255, 165, 0, 0.8),
+                0 0 30px rgba(255, 20, 147, 0.4);
+            animation: innerGlow 2s ease-in-out infinite alternate;
+            display: inline-block;
+            margin: 0 5px;
+        }
+
+        @keyframes innerGlow {
+            from {
+                text-shadow: 
+                    0 0 10px rgba(255, 215, 0, 1),
+                    0 0 20px rgba(255, 165, 0, 0.8),
+                    0 0 30px rgba(255, 20, 147, 0.4);
+            }
+            to {
+                text-shadow: 
+                    0 0 20px rgba(255, 215, 0, 1),
+                    0 0 30px rgba(255, 165, 0, 1),
+                    0 0 40px rgba(255, 20, 147, 0.6);
+            }
+        }
+
+        .floating-lights {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .light-particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.8) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: floatUp 8s linear infinite;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(100vh) scale(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) scale(1);
+                opacity: 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .content-wrapper {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            .main-title {
+                font-size: 2.5rem;
+            }
+            
+            .letter-container {
+                width: 250px;
+                height: 300px;
+            }
+            
+            .letter-i {
+                font-size: 8rem;
+            }
+            
+            .text-content {
+                padding: 30px;
+            }
+            
+            .text-content::before {
+                font-size: 18rem;
+            }
+            
+            .description {
+                font-size: 1.1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .text-content::before {
+                font-size: 14rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-lights"></div>
+    
+    <div class="container">
+        <div class="header">
+            <h1 class="main-title">I-infinite you</h1>
+        </div>
+        
+        <div class="content-wrapper">
+            <div class="letter-display">
+                 <div class="letter-container">
+            <!-- ✅ Image only -->
+            <img src="/asset/cube21.jpg" alt="Jyoti" class="profile-image">
+        </div>
+            </div>
+            
+            <div class="text-content">
+                <div class="description">
+                    <!-- The journey from <strong>J</strong> to <span class="inner-light-i">i</span> – more than letters, it's <strong>hope</strong>, <strong>strength</strong>, and <strong>love</strong>...  -->
+                    <!-- <br><br> -->
+                    For me <span class="inner-light-i">JYOTI</span> isn't just a name – it's the emotion that keep me going through tough days, the smile that made me believe in love exist...
+                    <br><br>
+                    <strong>Jyoti</strong>, you are my <strong>direction</strong>, my <strong>purpose</strong>, my <strong>inner light</strong> and<span class="inner-light-i">forever my babygirl</span>
+                    <br><br>
+                    The journey just started and  <strong>continue </strong>with my <strong>strong girl..</strong>.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Create floating light particles
+        function createFloatingLights() {
+            const container = document.querySelector('.floating-lights');
+            
+            for (let i = 0; i < 20; i++) {
+                const light = document.createElement('div');
+                light.className = 'light-particle';
+                light.style.left = Math.random() * 100 + '%';
+                light.style.animationDelay = Math.random() * 8 + 's';
+                light.style.animationDuration = (Math.random() * 3 + 5) + 's';
+                container.appendChild(light);
+            }
+        }
+
+        // Initialize floating lights
+        createFloatingLights();
+
+        // Add more particles periodically
+        setInterval(createFloatingLights, 8000);
+    </script>
+</body>
+</html>

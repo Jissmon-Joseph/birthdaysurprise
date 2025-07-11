@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Handwritten Letter</title>
+    <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Kalam', cursive;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .letter-container {
+            background: linear-gradient(45deg, #f4f1e8 0%, #e8dcc0 100%);
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 
+                0 20px 40px rgba(0, 0, 0, 0.15),
+                0 10px 20px rgba(0, 0, 0, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.5);
+            max-width: 600px;
+            width: 100%;
+            position: relative;
+            transform: rotate(-1deg);
+            transition: transform 0.3s ease;
+        }
+
+        .letter-container:hover {
+            transform: rotate(0deg) scale(1.02);
+        }
+
+        .letter-container::before {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            background: linear-gradient(45deg, #d4af37, #ffd700, #d4af37);
+            border-radius: 15px;
+            z-index: -1;
+            opacity: 0.3;
+        }
+
+        .letter-paper {
+            background: 
+                linear-gradient(90deg, transparent 0%, transparent 40px, #e8dcc0 40px, #e8dcc0 41px, transparent 41px),
+                linear-gradient(180deg, transparent 0%, transparent 30px, rgba(139, 69, 19, 0.1) 30px, rgba(139, 69, 19, 0.1) 31px, transparent 31px);
+            background-size: 100% 35px;
+            padding: 30px;
+            border-radius: 5px;
+            position: relative;
+            min-height: 400px;
+        }
+
+        .letter-content {
+            font-size: 18px;
+            line-height: 1.8;
+            color: #2c1810;
+            text-align: left;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+        }
+
+        .greeting {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #1a0f08;
+        }
+
+        .signature {
+            margin-top: 30px;
+            text-align: left;
+            font-size: 18px;
+            font-weight: 700;
+            color: #1a0f08;
+        }
+
+        .closing {
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-size: 18px;
+            font-weight: 700;
+            color: #1a0f08;
+        }
+
+        .ink-pen {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            width: 150px;
+            height: 20px;
+            background: linear-gradient(45deg, #2c1810 0%, #1a0f08 50%, #2c1810 100%);
+            border-radius: 10px;
+            transform: rotate(15deg);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .ink-pen::before {
+            content: '';
+            position: absolute;
+            left: -10px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 0;
+            height: 0;
+            border-left: 10px solid #d4af37;
+            border-top: 10px solid transparent;
+            border-bottom: 10px solid transparent;
+        }
+
+        .ink-well {
+            position: absolute;
+            bottom: 15px;
+            right: 180px;
+            width: 30px;
+            height: 30px;
+            background: radial-gradient(circle, #1a0f08 0%, #2c1810 100%);
+            border-radius: 50%;
+            box-shadow: 
+                0 5px 15px rgba(0, 0, 0, 0.3),
+                inset 0 2px 5px rgba(255, 255, 255, 0.1);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .letter-container {
+                padding: 20px;
+                transform: rotate(0deg);
+                margin: 10px;
+            }
+            
+            .letter-paper {
+                padding: 20px;
+                min-height: 300px;
+            }
+            
+            .letter-content {
+                font-size: 16px;
+                line-height: 1.6;
+            }
+            
+            .greeting {
+                font-size: 18px;
+            }
+            
+            .signature, .closing {
+                font-size: 16px;
+            }
+            
+            .ink-pen {
+                width: 100px;
+                height: 15px;
+                bottom: 15px;
+                right: 15px;
+            }
+            
+            .ink-well {
+                width: 25px;
+                height: 25px;
+                bottom: 12px;
+                right: 125px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+            
+            .letter-container {
+                padding: 15px;
+            }
+            
+            .letter-paper {
+                padding: 15px;
+                min-height: 250px;
+            }
+            
+            .letter-content {
+                font-size: 14px;
+                line-height: 1.5;
+            }
+            
+            .greeting {
+                font-size: 16px;
+                margin-bottom: 15px;
+            }
+            
+            .signature, .closing {
+                font-size: 14px;
+            }
+            
+            .closing {
+                margin-top: 15px;
+            }
+            
+            .signature {
+                margin-top: 20px;
+            }
+        }
+
+        /* Subtle animation for text */
+        .letter-content, .greeting, .closing, .signature {
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="letter-container">
+        <div class="letter-paper">
+            <div class="greeting">Jyoti,</div>
+            <div class="letter-content">
+                <!-- Replace this content with your own text -->
+                My love....i hope you see all the virtuall things that i send...i just tried to do certain things in the thought that you like ...i hope you enjoyed it.,,,this is just a reminder that we are heading to the final week to the birthday..and i am so excited,,its my girls birthday...the celebration has already began...now to the peak..I miss you and love you very much,,
+            </div>
+            <div class="closing">Yours Always,</div>
+            <div class="signature">Jissmon</div>
+        </div>
+        <!-- <div class="ink-well"></div> -->
+        <!-- <div class="ink-pen"></div> -->
+    </div>
+</body>
+</html>

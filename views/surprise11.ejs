@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Funnel+Sans:ital,wght@0,300..800;1,300..800&family=Mona+Sans:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
+    
+    <title>T - Trust | JYOTI KUSH</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(180deg, #daf0ec 0%, #daf0ec 10%, #4b222a 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+            color: #f8fafc;
+        }
+
+        /* Gentle trust aura background */
+        .trust-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            background: 
+                radial-gradient(ellipse at 30% 20%, rgba(139, 92, 246, 0.1) 0%, transparent 60%),
+                radial-gradient(ellipse at 70% 80%, rgba(168, 85, 247, 0.08) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 50%, rgba(192, 132, 252, 0.06) 0%, transparent 70%);
+            animation: gentleAura 20s ease-in-out infinite;
+        }
+
+        @keyframes gentleAura {
+            0%, 100% { 
+                opacity: 0.3; 
+                transform: scale(1) rotate(0deg); 
+            }
+            25% { 
+                opacity: 0.5; 
+                transform: scale(1.05) rotate(1deg); 
+            }
+            50% { 
+                opacity: 0.4; 
+                transform: scale(1.1) rotate(2deg); 
+            }
+            75% { 
+                opacity: 0.6; 
+                transform: scale(1.03) rotate(1deg); 
+            }
+        }
+
+        /* Gentle floating hearts/trust symbols */
+        .trust-particle {
+            position: absolute;
+            background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.6), rgba(192, 132, 252, 0.3));
+            border-radius: 50%;
+            animation: floatingTrust 12s ease-in-out infinite;
+            box-shadow: 0 0 20px rgba(192, 132, 252, 0.3);
+        }
+
+        .trust-particle:nth-child(1) { 
+            width: 6px; height: 6px; 
+            top: 80%; left: 10%; 
+            animation-delay: 0s; 
+        }
+        .trust-particle:nth-child(2) { 
+            width: 8px; height: 8px; 
+            top: 60%; right: 20%; 
+            animation-delay: 2s; 
+        }
+        .trust-particle:nth-child(3) { 
+            width: 4px; height: 4px; 
+            bottom: 30%; left: 70%; 
+            animation-delay: 4s; 
+        }
+        .trust-particle:nth-child(4) { 
+            width: 10px; height: 10px; 
+            top: 40%; right: 10%; 
+            animation-delay: 6s; 
+        }
+        .trust-particle:nth-child(5) { 
+            width: 5px; height: 5px; 
+            top: 70%; left: 50%; 
+            animation-delay: 8s; 
+        }
+
+        @keyframes floatingTrust {
+            0% { 
+                transform: translateY(0px) translateX(0px) scale(0.8); 
+                opacity: 0.4; 
+            }
+            25% { 
+                transform: translateY(-20px) translateX(10px) scale(1); 
+                opacity: 0.8; 
+            }
+            50% { 
+                transform: translateY(-40px) translateX(-5px) scale(1.2); 
+                opacity: 1; 
+            }
+            75% { 
+                transform: translateY(-20px) translateX(-10px) scale(1); 
+                opacity: 0.6; 
+            }
+            100% { 
+                transform: translateY(0px) translateX(0px) scale(0.8); 
+                opacity: 0.4; 
+            }
+        }
+
+        .container {
+            position: relative;
+            z-index: 10;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Gentle header emergence */
+        .header {
+            text-align: center;
+            padding: 3rem 0;
+            animation: gentleEmergence 2.5s ease-out;
+        }
+
+        @keyframes gentleEmergence {
+            0% { 
+                transform: translateY(30px); 
+                opacity: 0; 
+            }
+            60% { 
+                transform: translateY(-5px); 
+                opacity: 0.8; 
+            }
+            100% { 
+                transform: translateY(0); 
+                opacity: 1; 
+            }
+        }
+
+        .page-title {
+            font-size: 3.5rem;
+            background: linear-gradient(135deg, #3c5882);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+            /* text-shadow: 0 0 30px rgba(251, 191, 36, 0.3); */
+            letter-spacing: 2px;
+            font-weight: bolder;
+            position: relative;
+            /* color: #4448c7; */
+            animation: warmGlow 4s ease-in-out infinite;
+             font-family: "Dancing Script", cursive;  
+        }
+
+        @keyframes warmGlow {
+            0%, 100% { 
+                filter: drop-shadow(0 0 10px rgba(251, 191, 36, 0.3)); 
+            }
+            50% { 
+                filter: drop-shadow(0 0 20px rgba(251, 191, 36, 0.6)); 
+            }
+        }
+
+        .page-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 2px;
+            /* background: linear-gradient(90deg, #fbbf24, #f59e0b, #d97706); */
+            animation: gentleUnderline 3s ease-out 1s both;
+        }
+
+        @keyframes gentleUnderline {
+            0% { 
+                width: 0; 
+                opacity: 0; 
+            }
+            100% { 
+                width: 50%; 
+                opacity: 1; 
+            }
+        }
+
+        .subtitle {
+            font-size: 1.4rem;
+            color: #6a6b90;
+            font-style: italic;
+            text-shadow: 0 0 15px rgba(253, 230, 138, 0.4);
+            animation: subtitleFloat 2s ease-out 1.5s both;
+        }
+
+        @keyframes subtitleFloat {
+            from { 
+                opacity: 0; 
+                transform: translateY(20px); 
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0); 
+            }
+        }
+
+        /* Gentle image appearance - NEW ANIMATION */
+        .image-section {
+            display: flex;
+            justify-content: center;
+            padding: 2rem 0;
+            animation: gentleImageFade 3s ease-out 2s both;
+        }
+
+        @keyframes gentleImageFade {
+            0% { 
+                opacity: 0; 
+                transform: translateY(10px);
+            }
+            100% { 
+                opacity: 1; 
+                transform: translateY(0);
+            }
+        }
+
+        .trust-image-container {
+            position: relative;
+            width: 300px;
+            height: 400px;
+            /* background: linear-gradient(135deg, #a855f7 0%, #8b5cf6 30%, #7c3aed 60%, #6d28d9 100%); */
+            border-radius: 25px;
+            /* box-shadow: 0 15px 40px rgba(139, 92, 246, 0.3); */
+            overflow: hidden;
+            transition: all 0.6s ease;
+            animation: gentleImageBreathing 8s ease-in-out infinite;
+        }
+
+        @keyframes gentleImageBreathing {
+            0%, 100% { 
+                transform: scale(1); 
+                box-shadow: 0 15px 40px rgba(255, 255, 255, 0.3); 
+            }
+            50% { 
+                transform: scale(1.01); 
+                box-shadow: 0 18px 45px rgba(255, 255, 255, 0.35); 
+            }
+        }
+
+        .trust-image-container:hover {
+            transform: scale(1.03) translateY(-3px);
+            /* box-shadow: 0 20px 50px rgba(139, 92, 246, 0.4); */
+        }
+
+        .trust-image-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.08), transparent);
+            animation: gentleShimmer 8s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        @keyframes gentleShimmer {
+            0% { 
+                transform: translateX(-100%); 
+                opacity: 0; 
+            }
+            50% { 
+                transform: translateX(100%); 
+                opacity: 0.4; 
+            }
+            100% { 
+                transform: translateX(200%); 
+                opacity: 0; 
+            }
+        }
+
+        .trust-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+            border-radius: 25px;
+        }
+
+        .trust-image-container:hover .trust-image {
+            transform: scale(1.05);
+        }
+
+        /* Gentle description reveal */
+        .description {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 3rem 0;
+            animation: gentleUnfold 3s ease-out 2.5s both;
+        }
+
+        @keyframes gentleUnfold {
+            0% { 
+                transform: translateY(40px) scale(0.95); 
+                opacity: 0; 
+            }
+            60% { 
+                transform: translateY(-5px) scale(1.02); 
+                opacity: 0.8; 
+            }
+            100% { 
+                transform: translateY(0) scale(1); 
+                opacity: 1; 
+            }
+        }
+
+        .description-content {
+            max-width: 900px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            /* border: 2px solid rgba(251, 191, 36, 0.2); */
+            border-radius: 30px;
+            padding: 3.5rem;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+            position: relative;
+            overflow: hidden;
+            animation: gentlePulse 10s ease-in-out infinite;
+        }
+
+        @keyframes gentlePulse {
+            0%, 100% { 
+                /* border-color: rgba(251, 191, 36, 0.2);  */
+                /* box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);  */
+            }
+            50% { 
+                /* border-color: rgba(251, 191, 36, 0.4);  */
+                /* box-shadow: 0 25px 60px rgba(251, 191, 36, 0.1);  */
+            }
+        }
+
+        /* Enhanced background letter T */
+        .description-content::before {
+            content: 'T';
+            position: absolute;
+            top: 45%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 24rem;
+            font-weight: 900;
+            font-family: 'Georgia', serif;
+            background: linear-gradient(#cc9aba,#d5b5b2);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            opacity: 0.12;
+            z-index: 1;
+            animation: enhancedLetterGlow 12s ease-in-out infinite;
+            pointer-events: none;
+            /* text-shadow: 0 0 40px rgba(251, 191, 36, 0.15); */
+        }
+
+        @keyframes enhancedLetterGlow {
+            0%, 100% { 
+                opacity: 0.12; 
+                transform: translate(-50%, -50%) scale(1) rotate(0deg); 
+                text-shadow: 0 0 40px rgba(251, 191, 36, 0.15);
+            }
+            25% { 
+                opacity: 0.18; 
+                transform: translate(-50%, -50%) scale(1.02) rotate(0.5deg); 
+                text-shadow: 0 0 50px rgba(251, 191, 36, 0.2);
+            }
+            50% { 
+                opacity: 0.15; 
+                transform: translate(-50%, -50%) scale(1.04) rotate(1deg); 
+                text-shadow: 0 0 60px rgba(251, 191, 36, 0.25);
+            }
+            75% { 
+                opacity: 0.20; 
+                transform: translate(-50%, -50%) scale(1.01) rotate(0.2deg); 
+                text-shadow: 0 0 45px rgba(251, 191, 36, 0.18);
+            }
+        }
+
+        .description-text {
+            font-size: 1.3rem;
+            line-height: 1.8;
+            color: #fef3c7;
+            text-align: justify;
+            margin-bottom: 2rem;
+            position: relative;
+            z-index: 2;
+            animation: textReveal 2s ease-out 3s both;
+        }
+
+        @keyframes textReveal {
+            from { 
+                opacity: 0; 
+                transform: translateY(15px); 
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0); 
+            }
+        }
+
+        .description-text:last-child {
+            margin-bottom: 0;
+        }
+
+        .highlight {
+            color: #ffabbf;
+            font-weight: bold;
+            /* text-shadow: 0 0 15px rgba(251, 191, 36, 0.5); */
+            position: relative;
+            animation: highlightGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes highlightGlow {
+            0%, 100% { 
+                /* text-shadow: 0 0 15px rgba(251, 191, 36, 0.5);  */
+            }
+            50% { 
+                /* text-shadow: 0 0 25px rgba(251, 191, 36, 0.8);  */
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container { padding: 1rem; }
+            .page-title { font-size: 2.8rem; }
+            .subtitle { font-size: 1.2rem; }
+            .trust-image-container { width: 250px; height: 330px; }
+            .description-content { 
+                padding: 2.5rem; 
+                margin: 0 1rem; 
+            }
+            .description-content::before { font-size: 16rem; }
+            .description-text { font-size: 1.1rem; }
+        }
+
+        @media (max-width: 480px) {
+            .page-title { font-size: 2.2rem; }
+            .trust-image-container { width: 200px; height: 280px; }
+            .description-content { padding: 2rem; }
+            .description-content::before { font-size: 12rem; }
+            .description-text { font-size: 1rem; }
+        }
+
+        /* Gentle page load animation */
+        body.loaded {
+            animation: gentlePageLoad 1.5s ease-out;
+        }
+
+        @keyframes gentlePageLoad {
+            from { 
+                opacity: 0; 
+                transform: translateY(20px); 
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0); 
+            }
+        }
+
+        /* Gentle mouse interaction effects */
+        .trust-glow {
+            transition: all 0.3s ease;
+        }
+
+        .trust-glow:hover {
+            filter: drop-shadow(0 0 20px rgba(251, 191, 36, 0.4));
+        }
+    </style>
+</head>
+<body>
+    <!-- Gentle trust background -->
+    <div class="trust-bg"></div>
+    <div class="trust-particle"></div>
+    <div class="trust-particle"></div>
+    <div class="trust-particle"></div>
+    <div class="trust-particle"></div>
+    <div class="trust-particle"></div>
+
+    <div class="container">
+        <!-- Header Section -->
+        <header class="header">
+            <h1 class="page-title trust-glow">T - Trust you have in me</h1>
+            <p class="subtitle">like a strong foundation</p>
+        </header>
+
+        <!-- Image Section -->
+        <section class="image-section">
+            <div class="trust-image-container">
+                <img src="/asset/t_letter_one2.jpg" alt="Trust" class="trust-image">
+            </div>
+        </section>
+
+        <!-- Description Section -->
+        <section class="description">
+            <div class="description-content">
+                <p class="description-text">
+                    I have said many things to you..and i am making every possible things i can as you know <span class="highlight">The trust you have</span> in me is different thing..even though you are not expressive as i am...i know you you believe i will be there for you and will remain as your constant support in life..
+                </p>
+                <p class="description-text">
+                    I know it takes time for you to <span class="highlight">trust</span> me completely...i will wait for you girl..I wont disappoint you...if i could nt then consider me as dead..
+                </p>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // Gentle page load animation
+        window.addEventListener('load', function() {
+            document.body.classList.add('loaded');
+        });
+
+        // Gentle mouse interaction with trust particles
+        document.addEventListener('mousemove', function(e) {
+            const particles = document.querySelectorAll('.trust-particle');
+            particles.forEach((particle, index) => {
+                const speed = (index + 1) * 0.002;
+                const x = (e.clientX * speed) / 100;
+                const y = (e.clientY * speed) / 100;
+                
+                particle.style.transform += ` translate(${x}px, ${-y}px)`;
+            });
+        });
+
+        // Gentle parallax effect
+        window.addEventListener('scroll', function() {
+            const scrolled = window.pageYOffset;
+            const bg = document.querySelector('.trust-bg');
+            const particles = document.querySelectorAll('.trust-particle');
+            
+            // Subtle background movement
+            bg.style.transform = `translateY(${scrolled * 0.2}px)`;
+            
+            // Gentle particle floating
+            particles.forEach((particle, index) => {
+                const speed = (index + 1) * 0.1;
+                const floatHeight = scrolled * speed;
+                particle.style.transform += ` translateY(${-floatHeight}px)`;
+            });
+        });
+
+        // Gentle image hover effect
+        const imageContainer = document.querySelector('.trust-image-container');
+        let hoverTimeout;
+        
+        imageContainer.addEventListener('mouseenter', function() {
+            clearTimeout(hoverTimeout);
+            this.style.transition = 'all 0.6s ease';
+        });
+        
+        imageContainer.addEventListener('mouseleave', function() {
+            hoverTimeout = setTimeout(() => {
+                this.style.transition = 'all 0.8s ease';
+            }, 100);
+        });
+
+        // Gentle text reveal on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'textReveal 1.5s ease-out both';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.description-text').forEach(text => {
+            observer.observe(text);
+        });
+    </script>
+</body>
+</html>
