@@ -15,7 +15,7 @@
         
         body {
             font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #eceaeb 0%, #0b0a0b 100%);
             min-height: 100vh;
             color: white;
             overflow-x: hidden;
@@ -40,10 +40,11 @@
         .main-title {
             font-family: 'Dancing Script', cursive;
             font-size: 3.5rem;
-            font-weight: 700;
-            background: linear-gradient(45deg, #ff6b6b, #ffd93d, #6bcf7f, #4ecdc4);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            font-weight: 900;
+            /* background: linear-gradient(45deg, #df0a0a, #ffd93d, #07b72a, #059a90); */
+            color: white;
+            /* -webkit-background-clip: text; */
+            /* -webkit-text-fill-color: transparent; */
             background-clip: text;
             margin-bottom: 10px;
             text-shadow: 0 2px 4px rgba(0,0,0,0.1);
@@ -81,6 +82,7 @@
             align-items: center;
             padding: 20px;
             animation: fadeInUp 1s ease-out 0.3s both;
+
         }
         
         .image-wrapper {
@@ -108,7 +110,7 @@
             width: 400px;
             height: 600px;
             background: linear-gradient(45deg, #ff6b6b, #ffd93d);
-            /* border-radius: 20px; */
+            border-radius: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -177,12 +179,12 @@
         .play-btn {
             width: 70px;
             height: 70px;
-            background: linear-gradient(45deg, #ff6b6b, #ffd93d);
+            background: linear-gradient(45deg, #ce5656, #e2ce7c);
             font-size: 24px;
         }
         
         .play-btn:hover {
-            background: linear-gradient(45deg, #ff5252, #ffcc02);
+            background: linear-gradient(45deg, #ff5252, #dfc765);
             transform: scale(1.1);
         }
         
@@ -229,11 +231,24 @@
         .volume-slider {
             width: 120px;
             height: 4px;
-            background: rgba(255, 255, 255, 0.2);
+            /* background: rgba(255, 255, 255, 0.2); */
+            background: white;
             border-radius: 2px;
             outline: none;
             cursor: pointer;
+            /* color: ; */
+            -webkit-appearance: none;
         }
+
+.volume-slider::-webkit-slider-thumb{
+  -webkit-appearance: none;
+background: #87898c;
+width: 1rem;
+height: 1rem;
+cursor: pointer;
+border-radius: 50%;
+}
+
         
         /* Animations */
         @keyframes fadeInDown {
@@ -354,7 +369,7 @@
                 <div class="image-wrapper">
                     <div class="image-placeholder">
                     
-                            <img src="/asset/customsong.jpg" alt="For My Love">
+                            <img src="/asset/customsong.jpg" alt="For My Love" style="border-radius: 1rem;">
                         
                     
                     </div>
@@ -364,7 +379,7 @@
             <!-- Music Player -->
             <div class="music-player">
                 <div class="player-header">
-                    <h2 class="song-title">Meri world.wav</h2>
+                    <h2 class="song-title">Life_Jyoti.wav</h2>
                     <p class="artist-name">creator:  its me..</p>
                 </div>
                 
@@ -386,7 +401,7 @@
                 
                 <div class="volume-section">
                     <span class="volume-icon">🔊</span>
-                    <input type="range" class="volume-slider" id="volumeSlider" min="0" max="100" value="70">
+                    <input type="range" class="volume-slider"  id="volumeSlider" min="0" max="100" value="70">
                 </div>
                 
                 <audio id="audioPlayer" preload="metadata">
@@ -399,6 +414,19 @@
     </div>
     
     <script>
+
+
+const slider = document.getElementById("volumeSlider");
+
+  function updateSliderColor() {
+    const val = (slider.value - slider.min) / (slider.max - slider.min) * 100;
+    slider.style.background = `linear-gradient(to right, #87898c 0%, #87898c ${val}%, #e8e9eb ${val}%, #e8e9eb 100%)`;
+  }
+
+  slider.addEventListener("input", updateSliderColor);
+  updateSliderColor(); // set on load
+
+
         // Music Player Functionality
         const audio = document.getElementById('audioPlayer');
         const playBtn = document.getElementById('playBtn');
