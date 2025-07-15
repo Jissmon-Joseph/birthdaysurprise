@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Funnel+Sans:ital,wght@0,300..800;1,300..800&family=Mona+Sans:ital,wght@0,200..900;1,200..900&display=swap"
+        rel="stylesheet">
+    <title>Love Letters</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Dancing Script", cursive;
+            background: linear-gradient(90deg, #667eea 0%, #bf4747 100%);
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .heart-header {
+            text-align: center;
+            margin-bottom: 40px;
+            animation: heartbeat 2s ease-in-out infinite;
+        }
+
+        .heart-symbol {
+            font-size: 4rem;
+            color: #ffffff;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            margin-bottom: 10px;
+        }
+
+        .letters-container {
+            display: flex;
+            gap: 50px;
+            max-width: 1200px;
+            width: 100%;
+            justify-content: center;
+            align-items: flex-start;
+            padding-bottom: 2em;
+        }
+
+        .letter-card {
+
+            border-radius: 25px;
+            padding: 15px;
+            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.345);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            flex: 1;
+            max-width: 500px;
+        }
+
+        .letter-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        #letter-card-1 {
+            background: #667eea53;
+        }
+
+        #letter-card-2 {
+            background: #bf474748;
+        }
+
+        .letter-image {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            display: block;
+        }
+
+        .letter-title {
+            text-align: center;
+            margin-bottom: 15px;
+            color: #333;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        @keyframes heartbeat {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.1);
+            }
+        }
+
+        /* Mobile responsive design */
+        @media (max-width: 768px) {
+            .letters-container {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .heart-symbol {
+                font-size: 3rem;
+            }
+
+            .letter-card {
+                max-width: 100%;
+            }
+
+            body {
+                padding: 15px;
+            }
+
+            .heart-header {
+                margin-bottom: 30px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .heart-symbol {
+                font-size: 2.5rem;
+            }
+
+            .letter-card {
+                padding: 15px;
+            }
+
+            body {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="heart-header">
+        <div class="heart-symbol">Sweet part of my every day</div>
+    </div>
+
+    <div class="letters-container">
+        <div class="letter-card" id="letter-card-1">
+
+            <img src="/asset/promiseday1stpage.jpg" alt="Letter 1" class="letter-image">
+        </div>
+
+        <div class="letter-card" id="letter-card-2">
+
+            <img src="/asset/promiseday2page.jpg" alt="Letter 1" class="letter-image">
+        </div>
+    </div>
+</body>
+
+</html>
