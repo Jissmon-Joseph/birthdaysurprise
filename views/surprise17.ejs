@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jar de Memories - Aesthetic Collection</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@300;400;700&family=Inter:wght@300;400;500&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: radial-gradient(circle at 30%, #1c58b9 0%, #7d083b 25%, #355dcb 50%, #196ede 75%, #ae1534 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 12s ease infinite;
+            min-height: 100vh;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            color: white;
+            margin-bottom: 15px;
+            font-weight: 400;
+            letter-spacing: 4px;
+            text-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            position: relative;
+        }
+
+        .header h1::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, white, transparent);
+        }
+
+        .header p {
+            color: rgba(255,255,255,0.9);
+            font-size: 1.3rem;
+            font-weight: 300;
+            font-style: italic;
+            margin-top: 20px;
+        }
+
+        .artistic-canvas {
+            position: relative;
+            width: 100%;
+            height: 90vh;
+            min-height: 700px;
+            background: rgba(255,255,255,0.08);
+            border-radius: 30px;
+            backdrop-filter: blur(20px);
+            border: 2px solid rgba(255,255,255,0.15);
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+        }
+
+        .artistic-canvas::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpolygon points='50 0 60 40 100 50 60 60 50 100 40 60 0 50 40 40'/%3E%3C/g%3E%3C/svg%3E") repeat;
+            animation: patternFloat 20s linear infinite;
+        }
+
+        @keyframes patternFloat {
+            0% { transform: translateX(0) translateY(0); }
+            100% { transform: translateX(-100px) translateY(-100px); }
+        }
+
+        .memory-piece {
+            position: absolute;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 15px 50px rgba(0,0,0,0.15);
+            transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+            cursor: pointer;
+            overflow: hidden;
+            border: 6px solid white;
+            transform-style: preserve-3d;
+        }
+
+        .memory-piece::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4, #feca57, #ff6b6b);
+            background-size: 400% 400%;
+            animation: gradientShift 8s ease infinite;
+            border-radius: 22px;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.6s ease;
+        }
+
+        .memory-piece:hover::before {
+            opacity: 1;
+        }
+
+        .memory-piece:hover {
+            transform: scale(1.12) rotate(0deg) translateZ(50px) !important;
+            box-shadow: 0 30px 80px rgba(0,0,0,0.25);
+            z-index: 1000 !important;
+        }
+
+        /* Artistic Bottle Arrangements */
+        .bottle-alpha {
+            width: 220px;
+            height: 320px;
+            top: 5%;
+            left: 8%;
+            transform: rotate(-8deg) scale(0.95);
+            z-index: 8;
+            animation: floatGentle 6s ease-in-out infinite;
+        }
+
+        .bottle-beta {
+            width: 190px;
+            height: 280px;
+            top: 15%;
+            right: 12%;
+            transform: rotate(12deg) scale(1.05);
+            z-index: 7;
+            animation: floatGentle 7s ease-in-out infinite -1s;
+        }
+
+        .bottle-gamma {
+            width: 210px;
+            height: 310px;
+            bottom: 25%;
+            left: 15%;
+            transform: rotate(-5deg) scale(1.02);
+            z-index: 6;
+            animation: floatGentle 8s ease-in-out infinite -2s;
+        }
+
+        .bottle-delta {
+            width: 200px;
+            height: 290px;
+            bottom: 12%;
+            right: 10%;
+            transform: rotate(7deg) scale(0.98);
+            z-index: 5;
+            animation: floatGentle 6.5s ease-in-out infinite -3s;
+        }
+
+        /* Artistic Note Arrangements */
+        .note-alpha {
+            width: 180px;
+            height: 120px;
+            top: 45%;
+            left: 48%;
+            transform: translate(-50%, -50%) rotate(-15deg);
+            z-index: 12;
+            background: radial-gradient(circle at 30%, rgba(28, 88, 185, 0.9) 0%, rgba(125, 8, 59, 0.9) 25%, rgba(53, 93, 203, 0.9) 50%, rgba(25, 110, 222, 0.9) 75%, rgba(174, 21, 52, 0.9) 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 8s ease infinite;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+            animation: floatGentle 5s ease-in-out infinite -1.5s;
+        }
+
+        .note-beta {
+            width: 160px;
+            height: 110px;
+            top: 32%;
+            left: 42%;
+            transform: rotate(18deg);
+            z-index: 11;
+            background: radial-gradient(circle at 30%, rgba(28, 88, 185, 0.9) 0%, rgba(125, 8, 59, 0.9) 25%, rgba(53, 93, 203, 0.9) 50%, rgba(25, 110, 222, 0.9) 75%, rgba(174, 21, 52, 0.9) 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 8s ease infinite;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+            animation: floatGentle 5.5s ease-in-out infinite -2.5s;
+        }
+
+        @keyframes floatGentle {
+            0%, 100% { transform: translateY(0px) rotate(var(--base-rotation, 0deg)); }
+            50% { transform: translateY(-8px) rotate(calc(var(--base-rotation, 0deg) + 2deg)); }
+        }
+
+        .image-frame {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+            border-radius: 14px;
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+        }
+
+        .image-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            color: #666;
+            font-size: 1rem;
+            font-weight: 400;
+            text-align: center;
+            padding: 20px;
+            position: relative;
+            background: inherit;
+        }
+
+        .bottle-placeholder {
+            background: linear-gradient(135deg, #fff7e6, #ffd93d, #ffb74d);
+            color: #8b4513;
+        }
+
+        .note-placeholder {
+            background: inherit;
+            color: #000000;
+            border: 2px dashed rgba(255, 255, 255, 0.3);
+            border-radius: 12px;
+            margin: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Playfair Display', serif;
+            font-size: 0.9rem;
+            font-style: italic;
+            text-align: center;
+            padding: 15px;
+            text-shadow: 0 2px 4px rgba(255, 255, 255, 0.5);
+        }
+
+        .upload-input {
+            display: none;
+        }
+
+        .upload-area {
+            cursor: pointer;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            transition: all 0.4s ease;
+            border-radius: 12px;
+        }
+
+        .upload-area:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: scale(1.02);
+        }
+
+        .upload-icon {
+            font-size: 3rem;
+            margin-bottom: 12px;
+            opacity: 0.8;
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));
+        }
+
+        .upload-text {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+
+        .uploaded-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            display: none;
+            border-radius: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .memory-title {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(180deg, transparent, rgba(0,0,0,0.8));
+            color: white;
+            padding: 15px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            text-align: center;
+            font-family: 'Playfair Display', serif;
+            letter-spacing: 1px;
+            border-radius: 0 0 14px 14px;
+        }
+
+        /* Magical floating elements */
+        .magic-particle {
+            position: absolute;
+            color: rgba(255,255,255,0.6);
+            font-size: 1.5rem;
+            z-index: 1;
+            pointer-events: none;
+            animation: magicFloat 10s ease-in-out infinite;
+        }
+
+        .particle-1 {
+            top: 20%;
+            left: 15%;
+            animation-delay: 0s;
+        }
+
+        .particle-2 {
+            top: 60%;
+            right: 20%;
+            animation-delay: -2s;
+        }
+
+        .particle-3 {
+            bottom: 30%;
+            left: 25%;
+            animation-delay: -4s;
+        }
+
+        .particle-4 {
+            top: 35%;
+            right: 35%;
+            animation-delay: -6s;
+        }
+
+        .particle-5 {
+            bottom: 45%;
+            right: 15%;
+            animation-delay: -8s;
+        }
+
+        @keyframes magicFloat {
+            0%, 100% { 
+                transform: translateY(0px) rotate(0deg) scale(1);
+                opacity: 0.6;
+            }
+            25% { 
+                transform: translateY(-20px) rotate(90deg) scale(1.1);
+                opacity: 0.8;
+            }
+            50% { 
+                transform: translateY(-10px) rotate(180deg) scale(0.9);
+                opacity: 0.4;
+            }
+            75% { 
+                transform: translateY(-30px) rotate(270deg) scale(1.2);
+                opacity: 0.7;
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .artistic-canvas {
+                height: 80vh;
+                min-height: 600px;
+            }
+            
+            .bottle-alpha, .bottle-beta, .bottle-gamma, .bottle-delta {
+                width: 180px;
+                height: 250px;
+            }
+            
+            .note-alpha, .note-beta {
+                width: 150px;
+                height: 100px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.5rem;
+                letter-spacing: 2px;
+            }
+            
+            .artistic-canvas {
+                height: 75vh;
+                min-height: 550px;
+                border-radius: 20px;
+            }
+            
+            .bottle-alpha {
+                width: 140px;
+                height: 200px;
+                top: 8%;
+                left: 5%;
+            }
+            
+            .bottle-beta {
+                width: 130px;
+                height: 185px;
+                top: 12%;
+                right: 8%;
+            }
+            
+            .bottle-gamma {
+                width: 135px;
+                height: 195px;
+                bottom: 30%;
+                left: 8%;
+            }
+            
+            .bottle-delta {
+                width: 132px;
+                height: 188px;
+                bottom: 25%;
+                right: 6%;
+            }
+            
+            .note-alpha {
+                width: 120px;
+                height: 80px;
+                top: 42%;
+                left: 45%;
+            }
+            
+            .note-beta {
+                width: 110px;
+                height: 75px;
+                top: 35%;
+                left: 40%;
+            }
+            
+            .note-placeholder {
+                font-size: 0.8rem;
+                padding: 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 15px;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .artistic-canvas {
+                height: 70vh;
+                min-height: 500px;
+                border-radius: 15px;
+            }
+            
+            .bottle-alpha, .bottle-beta, .bottle-gamma, .bottle-delta {
+                width: 100px;
+                height: 145px;
+            }
+            
+            .note-alpha, .note-beta {
+                width: 90px;
+                height: 60px;
+            }
+            
+            .bottle-alpha {
+                top: 6%;
+                left: 3%;
+            }
+            
+            .bottle-beta {
+                top: 10%;
+                right: 5%;
+            }
+            
+            .bottle-gamma {
+                bottom: 35%;
+                left: 5%;
+            }
+            
+            .bottle-delta {
+                bottom: 30%;
+                right: 3%;
+            }
+            
+            .note-alpha {
+                top: 40%;
+                left: 42%;
+            }
+            
+            .note-beta {
+                top: 32%;
+                left: 38%;
+            }
+            
+            .upload-icon {
+                font-size: 2rem;
+            }
+            
+            .upload-text {
+                font-size: 0.75rem;
+            }
+            
+            .memory-title {
+                font-size: 0.7rem;
+                padding: 10px;
+            }
+            
+            .note-placeholder {
+                font-size: 0.7rem;
+                padding: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>LOCKED IN HEART😘</h1>
+            <!-- <p>Where moments become timeless treasures</p> -->
+        </div>
+
+        <!-- Magical floating particles -->
+        <div class="magic-particle particle-1">✨</div>
+        <div class="magic-particle particle-2">🌟</div>
+        <div class="magic-particle particle-3">💫</div>
+        <div class="magic-particle particle-4">⭐</div>
+        <div class="magic-particle particle-5">🔮</div>
+
+        <div class="artistic-canvas">
+            <!-- Artistic Bottle Arrangements -->
+            <div class="memory-piece bottle-alpha" style="--base-rotation: -8deg;">
+                <div class="image-frame">
+                    <div class="image-placeholder bottle-placeholder" style="display: none;">
+                        <label for="bottle1" class="upload-area">
+                            <div class="upload-icon">🏺</div>
+                            <div class="upload-text">Memory Vessel</div>
+                        </label>
+                    </div>
+                    <input type="file" id="bottle1" class="upload-input" accept="image/*" onchange="handleImageUpload(this, 'bottle1')">
+                    <img class="uploaded-image" id="img-bottle1" src="/asset/gift2.jpg" alt="Memory Bottle 1" style="display: block;">
+                    <!-- <div class="memory-title">Precious Memory I</div> -->
+                </div>
+            </div>
+
+            <div class="memory-piece bottle-beta" style="--base-rotation: 12deg;">
+                <div class="image-frame">
+                    <div class="image-placeholder bottle-placeholder" style="display: none;">
+                        <label for="bottle2" class="upload-area">
+                            <div class="upload-icon">🏺</div>
+                            <div class="upload-text">Memory Vessel</div>
+                        </label>
+                    </div>
+                    <input type="file" id="bottle2" class="upload-input" accept="image/*" onchange="handleImageUpload(this, 'bottle2')">
+                    <img class="uploaded-image" id="img-bottle2" src="/asset/dummycopy.jpg" alt="Memory Bottle 2" style="display: block;">
+                    <!-- <div class="memory-title">Precious Memory II</div> -->
+                </div>
+            </div>
+
+            <div class="memory-piece bottle-gamma" style="--base-rotation: -5deg;">
+                <div class="image-frame">
+                    <div class="image-placeholder bottle-placeholder" style="display: none;">
+                        <label for="bottle3" class="upload-area">
+                            <div class="upload-icon">🏺</div>
+                            <div class="upload-text">Memory Vessel</div>
+                        </label>
+                    </div>
+                    <input type="file" id="bottle3" class="upload-input" accept="image/*" onchange="handleImageUpload(this, 'bottle3')">
+                    <img class="uploaded-image" id="img-bottle3" src="/asset/gift4.jpg" alt="Memory Bottle 3" style="display: block;">
+                    <!-- <div class="memory-title">Precious Memory III</div> -->
+                </div>
+            </div>
+
+            <div class="memory-piece bottle-delta" style="--base-rotation: 7deg;">
+                <div class="image-frame">
+                    <div class="image-placeholder bottle-placeholder" style="display: none;">
+                        <label for="bottle4" class="upload-area">
+                            <div class="upload-icon">🏺</div>
+                            <div class="upload-text">Memory Vessel</div>
+                        </label>
+                    </div>
+                    <input type="file" id="bottle4" class="upload-input" accept="image/*" onchange="handleImageUpload(this, 'bottle4')">
+                    <img class="uploaded-image" id="img-bottle4" src="/asset/gift5.jpg" alt="Memory Bottle 4" style="display: block;">
+                    <!-- <div class="memory-title">Precious Memory IV</div> -->
+                </div>
+            </div>
+
+            <!-- Artistic Note Arrangements -->
+            <div class="memory-piece note-alpha" style="--base-rotation: -15deg;">
+                <div class="image-frame">
+                    <div class="note-placeholder">Princess Always... <br>Love you to the moon</div>
+                </div>
+            </div>
+
+            <div class="memory-piece note-beta" style="--base-rotation: 18deg;">
+                <div class="image-frame">
+                    <div class="note-placeholder">My Own Precious</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function handleImageUpload(input, id) {
+            const file = input.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const img = document.getElementById('img-' + id);
+                    const placeholder = input.parentElement.querySelector('.image-placeholder');
+
+                    // Create a temporary image to load the file
+                    const tempImg = new Image();
+                    tempImg.src = e.target.result;
+
+                    tempImg.onload = function() {
+                        // Resize image if needed
+                        const canvas = document.createElement('canvas');
+                        const ctx = canvas.getContext('2d');
+                        const maxWidth = 300;
+                        const maxHeight = 300;
+
+                        let width = tempImg.width;
+                        let height = tempImg.height;
+
+                        // Calculate new dimensions while maintaining aspect ratio
+                        if (width > height) {
+                            if (width > maxWidth) {
+                                height = Math.round((height * maxWidth) / width);
+                                width = maxWidth;
+                            }
+                        } else {
+                            if (height > maxHeight) {
+                                width = Math.round((width * maxHeight) / height);
+                                height = maxHeight;
+                            }
+                        }
+
+                        canvas.width = width;
+                        canvas.height = height;
+                        ctx.drawImage(tempImg, 0, 0, width, height);
+
+                        // Set the resized image as the source
+                        img.src = canvas.toDataURL('image/jpeg', 0.8);
+                        img.style.display = 'block';
+                        placeholder.style.display = 'none';
+
+                        img.style.width = '100%';
+                        img.style.height = '100%';
+                        img.style.objectFit = 'cover';
+                        img.style.objectPosition = 'center';
+
+                        // Magical reveal animation
+                        img.style.opacity = '0';
+                        img.style.transform = 'scale(0.8)';
+                        setTimeout(() => {
+                            img.style.transition = 'all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+                            img.style.opacity = '1';
+                            img.style.transform = 'scale(1)';
+                        }, 100);
+                    };
+
+                    tempImg.onerror = function() {
+                        console.error('Failed to load image for ' + id);
+                        placeholder.style.display = 'flex';
+                        img.style.display = 'none';
+                    };
+                };
+                reader.onerror = function() {
+                    console.error('Failed to read file for ' + id);
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        // Enhanced interaction effects
+        document.querySelectorAll('.memory-piece').forEach(item => {
+            item.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                item.style.transform = item.style.transform + ' scale(1.05)';
+                item.style.filter = 'brightness(1.1) saturate(1.2)';
+                item.style.boxShadow = '0 25px 60px rgba(0,0,0,0.3)';
+            });
+
+            item.addEventListener('dragleave', (e) => {
+                e.preventDefault();
+                item.style.transform = item.style.transform.replace(' scale(1.05)', '');
+                item.style.filter = 'brightness(1) saturate(1)';
+                item.style.boxShadow = '0 15px 50px rgba(0,0,0,0.15)';
+            });
+
+            item.addEventListener('drop', (e) => {
+                e.preventDefault();
+                item.style.transform = item.style.transform.replace(' scale(1.05)', '');
+                item.style.filter = 'brightness(1) saturate(1)';
+                item.style.boxShadow = '0 15px 50px rgba(0,0,0,0.15)';
+                
+                const files = e.dataTransfer.files;
+                if (files.length > 0) {
+                    const input = item.querySelector('.upload-input');
+                    if (input) {
+                        input.files = files;
+                        handleImageUpload(input, input.id);
+                    }
+                }
+            });
+        });
+
+        // Advanced 3D mouse tracking
+        document.addEventListener('mousemove', (e) => {
+            const canvas = document.querySelector('.artistic-canvas');
+            const rect = canvas.getBoundingClientRect();
+            const x = (e.clientX - rect.left) / rect.width;
+            const y = (e.clientY - rect.top) / rect.height;
+            
+            document.querySelectorAll('.memory-piece').forEach((piece, index) => {
+                const intensity = (index % 2 === 0) ? 15 : -15;
+                const rotateX = (y - 0.5) * intensity * 0.3;
+                const rotateY = (x - 0.5) * intensity * 0.3;
+                const translateX = (x - 0.5) * intensity * 0.1;
+                const translateY = (y - 0.5) * intensity * 0.1;
+                
+                piece.style.transform = piece.style.transform.replace(/perspective\([^)]*\)/, '') + 
+                    ` perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translate(${translateX}px, ${translateY}px)`;
+            });
+        });
+
+        // Magical particle interaction
+        document.querySelectorAll('.magic-particle').forEach(particle => {
+            particle.addEventListener('mouseenter', () => {
+                particle.style.transform = 'scale(1.5) rotate(180deg)';
+                particle.style.color = '#fff';
+                particle.style.textShadow = '0 0 20px currentColor';
+            });
+            
+            item.addEventListener('mouseleave', () => {
+                particle.style.transform = 'scale(1) rotate(0deg)';
+                particle.style.color = 'rgba(255,255,255,0.6)';
+                particle.style.textShadow = 'none';
+            });
+        });
+
+        // Mobile touch optimizations
+        if ('ontouchstart' in window) {
+            document.querySelectorAll('.memory-piece').forEach(piece => {
+                piece.addEventListener('touchstart', (e) => {
+                    piece.style.transform = piece.style.transform + ' scale(0.95)';
+                    piece.style.filter = 'brightness(1.1)';
+                });
+                
+                piece.addEventListener('touchend', (e) => {
+                    setTimeout(() => {
+                        piece.style.transform = piece.style.transform.replace(' scale(0.95)', '');
+                        piece.style.filter = 'brightness(1)';
+                    }, 200);
+                });
+            });
+        }
+
+        // Dynamic canvas resizing
+        function updateCanvasSize() {
+            const canvas = document.querySelector('.artistic-canvas');
+            const container = document.querySelector('.container');
+            const maxHeight = window.innerHeight * 0.85;
+            canvas.style.height = Math.min(maxHeight, 700) + 'px';
+        }
+
+        window.addEventListener('resize', updateCanvasSize);
+        updateCanvasSize();
+    </script>
+</body>
+</html>
