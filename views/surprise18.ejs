@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beautiful Image Collage</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', 'Montserrat', sans-serif;
+            background: linear-gradient(90deg, 
+                /* #2c3e50 0%,  */
+                #1d4996 0%, 
+                #bf2424 50%, 
+                #182c6e 100%);
+            background-attachment: fixed;
+            min-height: 100vh;
+            padding: 40px 20px;
+            overflow-x: hidden;
+            color: white;
+        }
+
+        .collage-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .collage-title {
+            text-align: center;
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 40px;
+            text-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(to right, #ff6b6b, #feca57);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: glow 2s ease-in-out infinite alternate;
+            font-family: 'Montserrat', 'Poppins', sans-serif;
+        }
+
+        @keyframes glow {
+            from {
+                text-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            }
+            to {
+                text-shadow: 0 4px 20px rgba(255, 255, 255, 0.5);
+            }
+        }
+
+        .collage-wrapper {
+            position: relative;
+            width: 100%;
+            height: 80vh;
+            min-height: 600px;
+        }
+
+        .image-frame {
+            position: absolute;
+            background:  #fec95770;
+            border-radius: 25px;
+            padding: 10px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2), 
+                        0 0 20px rgba(255, 255, 255, 0.3);
+            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+            cursor: pointer;
+            backdrop-filter: blur(12px);
+            border: 2px solid  #ff6b6b89;
+        }
+
+        .image-frame:hover {
+            transform: scale(1.1) rotate(0deg) !important;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3), 
+                        0 0 30px rgba(255, 255, 255, 0.5);
+            z-index: 10;
+        }
+
+        .image-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 15px;
+            transition: transform 0.4s ease;
+        }
+
+        /* First image - Top left, larger */
+        .image-frame:nth-child(1) {
+            top: 5%;
+            left: 5%;
+            width: 420px;
+            height: 360px;
+            transform: rotate(-3deg);
+            z-index: 3;
+        }
+
+        /* Second image - Center right, medium */
+        .image-frame:nth-child(2) {
+            top: 25%;
+            right: 8%;
+            width: 340px;
+            height: 290px;
+            transform: rotate(4deg);
+            z-index: 2;
+        }
+
+        /* Third image - Bottom left, medium */
+        .image-frame:nth-child(3) {
+            bottom: 10%;
+            left: 35%;
+            width: 360px;
+            height: 310px;
+            transform: rotate(-2deg);
+            z-index: 1;
+        }
+
+        /* Floating decorative elements */
+        .floating-element {
+            position: absolute;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0));
+            border-radius: 50%;
+            pointer-events: none;
+            animation: float 5s ease-in-out infinite, pulse 3s ease-in-out infinite;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
+        }
+
+        .floating-element:nth-child(4) {
+            top: 10%;
+            right: 20%;
+            width: 100px;
+            height: 100px;
+            animation-delay: 0s;
+        }
+
+        .floating-element:nth-child(5) {
+            bottom: 15%;
+            right: 10%;
+            width: 70px;
+            height: 70px;
+            animation-delay: 1.5s;
+        }
+
+        .floating-element:nth-child(6) {
+            top: 45%;
+            left: 5%;
+            width: 50px;
+            height: 50px;
+            animation-delay: 3s;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-25px) rotate(180deg);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 0.8;
+            }
+            50% {
+                transform: scale(1.2);
+                opacity: 1;
+            }
+        }
+
+        /* Responsive design */
+        @media (max-width: 1200px) {
+            .collage-title {
+                font-size: 2.5rem;
+            }
+
+            .image-frame:nth-child(1) {
+                width: 360px;
+                height: 310px;
+                top: 8%;
+                left: 8%;
+            }
+            
+            .image-frame:nth-child(2) {
+                width: 300px;
+                height: 250px;
+                top: 30%;
+                right: 10%;
+            }
+            
+            .image-frame:nth-child(3) {
+                width: 320px;
+                height: 270px;
+                bottom: 15%;
+                left: 18%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .collage-title {
+                font-size: 2rem;
+                margin-bottom: 20px;
+            }
+
+            .collage-wrapper {
+                height: 90vh;
+                min-height: 500px;
+            }
+
+            .image-frame:nth-child(1) {
+                top: 5%;
+                left: 50%;
+                transform: translateX(-50%) rotate(-1deg);
+                width: 300px;
+                height: 240px;
+            }
+            
+            .image-frame:nth-child(2) {
+                top: 35%;
+                right: 5%;
+                width: 260px;
+                height: 220px;
+                transform: rotate(2deg);
+            }
+            
+            .image-frame:nth-child(3) {
+                bottom: 5%;
+                left: 5%;
+                width: 280px;
+                height: 220px;
+                transform: rotate(-1deg);
+            }
+
+            .floating-element {
+                display: none;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 20px 10px;
+            }
+
+            .collage-title {
+                font-size: 1.8rem;
+            }
+
+            .collage-wrapper {
+                height: 85vh;
+                min-height: 450px;
+            }
+
+            .image-frame:nth-child(1) {
+                top: 5%;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 260px;
+                height: 200px;
+            }
+            
+            .image-frame:nth-child(2) {
+                top: 35%;
+                right: 15%;
+                width: 220px;
+                height: 180px;
+                transform: rotate(1deg);
+            }
+            
+            .image-frame:nth-child(3) {
+                bottom: 8%;
+                left: 5%;
+                width: 240px;
+                height: 180px;
+                transform: rotate(-0.5deg);
+            }
+        }
+
+        /* Animation on load */
+        .image-frame {
+            opacity: 0;
+            transform: scale(0.7) rotate(0deg);
+            animation: slideIn 1s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+        }
+
+        .image-frame:nth-child(1) { animation-delay: 0.3s; }
+        .image-frame:nth-child(2) { animation-delay: 0.6s; }
+        .image-frame:nth-child(3) { animation-delay: 0.9s; }
+
+        @keyframes slideIn {
+            to {
+                opacity: 1;
+                transform: scale(1) rotate(var(--rotation, 0deg));
+            }
+        }
+
+        /* Lightbox styles */
+        .lightbox {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .lightbox.active {
+            opacity: 1;
+        }
+
+        .lightbox img {
+            max-width: 85%;
+            max-height: 70%;
+            border-radius: 20px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 
+                        0 0 30px rgba(255, 255, 255, 0.3);
+            transform: scale(0.8);
+            transition: transform 0.4s ease;
+        }
+
+        .lightbox.active img {
+            transform: scale(1);
+        }
+
+        .lightbox-caption {
+            margin-top: 20px;
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: white;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
+            max-width: 80%;
+            text-align: center;
+            font-family: 'Montserrat', 'Poppins', sans-serif;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: white;
+            font-size: 2.5rem;
+            cursor: pointer;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .close-btn:hover {
+            background: rgba(255, 255, 255, 0.4);
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="collage-container">
+        <h1 class="collage-title">Woven Dreams</h1>
+        <div class="collage-wrapper">
+            <div class="image-frame" style="--rotation: -3deg;">
+                <img src="/asset/page17pic2.jpg"alt="" loading="lazy">
+            </div>
+
+            <div class="image-frame" style="--rotation: 4deg;">
+                <!-- <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k=" alt="Serene Portrait" loading="lazy"> -->
+              <img src="/asset/page17pic3.jpg"alt="" loading="lazy">
+            </div>
+
+            <div class="image-frame" style="--rotation: -2deg;">
+                <!-- <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k=" alt="Heartfelt Moment" loading="lazy"> -->
+            <img src="/asset/page17pic1.jpg"alt="" loading="lazy">
+            </div>
+
+            <div class="floating-element"></div>
+            <div class="floating-element"></div>
+            <div class="floating-element"></div>
+        </div>
+    </div>
+
+    <script>
+        // Lightbox functionality
+        const imageFrames = document.querySelectorAll('.image-frame');
+        
+        imageFrames.forEach(frame => {
+            frame.addEventListener('click', function() {
+                const img = this.querySelector('img');
+                
+                // Create lightbox
+                const lightbox = document.createElement('div');
+                lightbox.className = 'lightbox';
+                lightbox.setAttribute('role', 'dialog');
+                lightbox.setAttribute('aria-modal', 'true');
+                
+                const lightboxImg = document.createElement('img');
+                lightboxImg.src = img.src;
+                lightboxImg.alt = img.alt;
+                
+                const caption = document.createElement('div');
+                caption.className = 'lightbox-caption';
+                caption.textContent = img.alt;
+                
+                const closeBtn = document.createElement('button');
+                closeBtn.className = 'close-btn';
+                closeBtn.innerHTML = '×';
+                closeBtn.setAttribute('aria-label', 'Close lightbox');
+                
+                lightbox.appendChild(lightboxImg);
+                lightbox.appendChild(caption);
+                lightbox.appendChild(closeBtn);
+                document.body.appendChild(lightbox);
+                
+                // Show lightbox with animation
+                setTimeout(() => {
+                    lightbox.classList.add('active');
+                }, 10);
+                
+                // Close lightbox
+                function closeLightbox() {
+                    lightbox.classList.remove('active');
+                    setTimeout(() => {
+                        document.body.removeChild(lightbox);
+                    }, 400);
+                }
+                
+                closeBtn.addEventListener('click', closeLightbox);
+                lightbox.addEventListener('click', function(e) {
+                    if (e.target === lightbox) {
+                        closeLightbox();
+                    }
+                });
+                
+                // Close on escape key
+                document.addEventListener('keydown', function(e) {
+                    if (e.key === 'Escape') {
+                        closeLightbox();
+                    }
+                }, { once: true });
+            });
+        });
+
+        // Enhanced parallax effect for floating elements
+        document.addEventListener('mousemove', function(e) {
+            const floatingElements = document.querySelectorAll('.floating-element');
+            const mouseX = e.clientX / window.innerWidth;
+            const mouseY = e.clientY / window.innerHeight;
+            
+            floatingElements.forEach((element, index) => {
+                const speed = (index + 1) * 0.6;
+                const x = (mouseX - 0.5) * speed * 30;
+                const y = (mouseY - 0.5) * speed * 30;
+                
+                element.style.transform = `translate(${x}px, ${y}px) scale(1)`;
+            });
+        });
+
+        // Intersection Observer for scroll animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationPlayState = 'running';
+                }
+            });
+        }, { threshold: 0.2 });
+
+        imageFrames.forEach(frame => {
+            observer.observe(frame);
+        });
+    </script>
+</body>
+</html>
