@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photo Album Gift Page</title>
+    <link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            background: linear-gradient(135deg, #000000, #312e3e, #423c2e, #1e262f, #1a2b27);
+            background-size: 200% 200%;
+            animation: glowGradient 12s ease infinite;
+            font-family: 'Georgia', serif;
+            color: #ffffff;
+            min-height: 100vh;
+            padding: 1rem;
+            overflow-x: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        @keyframes glowGradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .album-container {
+            background: linear-gradient(135deg, #181a18be, #171817);
+            border: 10px solid #dfd69857;
+            border-radius: 15px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.7);
+            padding: 2rem;
+            max-width: 1200px;
+            width: 100%;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            align-self: center;
+        }
+
+        .album-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.05);
+            z-index: 0;
+            border-radius: 15px;
+        }
+
+        h1 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            text-align: center;
+            color: #ffcc5c;
+            text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.6);
+            margin-bottom: 2rem;
+            position: relative;
+            z-index: 1;
+            line-height: 1.2;
+        }
+
+        .photo-grid {
+            position: relative;
+            width: 100%;
+            height: clamp(250px, 40vw, 400px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            z-index: 1;
+            margin-bottom: 2rem;
+        }
+
+        .photo {
+            position: absolute;
+            width: clamp(120px, 15vw, 200px);
+            height: clamp(150px, 20vw, 250px);
+            background: #fff;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        .photo:hover {
+            transform: scale(1.05);
+        }
+
+        .photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Animation keyframes for sliding effect */
+        @keyframes slideIn {
+            0% { transform: translateX(-100%) scale(0.8); opacity: 0; }
+            20% { transform: translateX(0) scale(1); opacity: 1; }
+            80% { transform: translateX(0) scale(1); opacity: 1; }
+            100% { transform: translateX(100%) scale(0.8); opacity: 0; }
+        }
+
+        .photo-1 { left: 5%; top: 10%; animation: slideIn 10s infinite; animation-delay: 0s; }
+        .photo-2 { left: 25%; top: 30%; animation: slideIn 10s infinite; animation-delay: 2s; }
+        .photo-3 { left: 45%; top: 5%; animation: slideIn 10s infinite; animation-delay: 4s; }
+        .photo-4 { left: 65%; top: 25%; animation: slideIn 10s infinite; animation-delay: 6s; }
+        .photo-5 { left: 85%; top: 45%; animation: slideIn 10s infinite; animation-delay: 8s; }
+
+        .text-box {
+            background: linear-gradient(135deg, #d3dbad, #ccd1b8, #d0dab9);
+            padding: 2rem;
+            /* font-family: 'Georgia', serif;
+             */
+             font-family: 'Libre Baskerville', cursive;
+             font-style:italic;
+            width: 100%;
+            max-width: 600px;
+            min-height: 150px;
+            box-shadow: 
+                0 10px 25px rgba(139, 69, 19, 0.3),
+                inset 0 0 20px rgba(101, 67, 33, 0.1);
+            position: relative;
+            z-index: 1;
+            transition: all 0.3s ease;
+            font-size: clamp(0.875rem, 2vw, 1rem);
+            color: #4a3728d0;
+            line-height: 1.6;
+            clip-path: polygon(
+                5% 0%, 
+                85% 3%, 
+                95% 8%, 
+                100% 15%, 
+                97% 25%, 
+                100% 40%, 
+                95% 55%, 
+                98% 70%, 
+                92% 85%, 
+                85% 95%, 
+                70% 98%, 
+                50% 100%, 
+                25% 97%, 
+                15% 92%, 
+                8% 85%, 
+                3% 70%, 
+                0% 50%, 
+                2% 35%, 
+                0% 20%, 
+                3% 10%
+            );
+            transform: rotate(-1.5deg);
+            border: none;
+        }
+
+        .text-box::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(139, 69, 19, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 80% 70%, rgba(101, 67, 33, 0.12) 0%, transparent 45%),
+                radial-gradient(circle at 40% 80%, rgba(160, 82, 45, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 70% 20%, rgba(139, 69, 19, 0.08) 0%, transparent 35%);
+            clip-path: polygon(
+                3% 0%, 
+                87% 2%, 
+                97% 6%, 
+                100% 18%, 
+                98% 28%, 
+                100% 42%, 
+                96% 58%, 
+                99% 72%, 
+                94% 87%, 
+                87% 97%, 
+                72% 99%, 
+                48% 100%, 
+                23% 98%, 
+                13% 94%, 
+                6% 87%, 
+                1% 72%, 
+                0% 48%, 
+                1% 33%, 
+                0% 18%, 
+                1% 8%
+            );
+            z-index: -2;
+            filter: blur(3px);
+        }
+
+        .text-box::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                repeating-linear-gradient(
+                    45deg,
+                    transparent,
+                    transparent 8px,
+                    rgba(139, 69, 19, 0.02) 8px,
+                    rgba(139, 69, 19, 0.02) 16px
+                ),
+                radial-gradient(circle at 15% 25%, rgba(139, 69, 19, 0.08) 0%, transparent 25%),
+                radial-gradient(circle at 85% 15%, rgba(101, 67, 33, 0.06) 0%, transparent 20%),
+                radial-gradient(circle at 25% 85%, rgba(160, 82, 45, 0.05) 0%, transparent 15%),
+                radial-gradient(circle at 75% 75%, rgba(139, 69, 19, 0.09) 0%, transparent 30%),
+                radial-gradient(circle at 60% 40%, rgba(101, 67, 33, 0.04) 0%, transparent 18%);
+            clip-path: polygon(
+                5% 0%, 
+                85% 3%, 
+                95% 8%, 
+                100% 15%, 
+                97% 25%, 
+                100% 40%, 
+                95% 55%, 
+                98% 70%, 
+                92% 85%, 
+                85% 95%, 
+                70% 98%, 
+                50% 100%, 
+                25% 97%, 
+                15% 92%, 
+                8% 85%, 
+                3% 70%, 
+                0% 50%, 
+                2% 35%, 
+                0% 20%, 
+                3% 10%
+            );
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* Additional torn pieces scattered around */
+        .text-box .torn-piece {
+            position: absolute;
+            background: linear-gradient(45deg, #191919,#1a1b1a);
+            z-index: 2;
+            opacity: 0.89;
+        }
+
+        .text-box .torn-piece-1 {
+            width: 20px;
+            height: 35px;
+            top: -15px;
+            left: 20%;
+            clip-path: polygon(20% 0%, 80% 5%, 100% 25%, 85% 60%, 90% 100%, 40% 95%, 0% 80%, 15% 40%);
+            transform: rotate(25deg);
+        }
+
+        .text-box .torn-piece-2 {
+            width: 25px;
+            height: 20px;
+            bottom: -10px;
+            right: 30%;
+            clip-path: polygon(0% 20%, 60% 0%, 100% 30%, 80% 70%, 100% 100%, 20% 80%, 0% 100%);
+            transform: rotate(-15deg);
+        }
+
+        .text-box .torn-piece-3 {
+            width: 30px;
+            height: 15px;
+            top: 30%;
+            right: -12px;
+            clip-path: polygon(0% 0%, 70% 10%, 100% 40%, 90% 80%, 60% 100%, 20% 90%, 0% 60%);
+            transform: rotate(60deg);
+        }
+
+        .text-box .torn-piece-4 {
+            width: 15px;
+            height: 25px;
+            bottom: 40%;
+            left: -8px;
+            clip-path: polygon(30% 0%, 100% 20%, 80% 50%, 100% 90%, 50% 100%, 0% 70%, 20% 30%);
+            transform: rotate(-30deg);
+        }
+
+        .text-box:hover {
+            box-shadow: 
+                0 15px 35px rgba(139, 69, 19, 0.4),
+                inset 0 0 25px rgba(101, 67, 33, 0.15);
+            transform: rotate(-1deg) scale(1.02);
+        }
+
+        .popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+
+        .popup img {
+            max-width: 95%;
+            max-height: 95%;
+            border: 8px solid #e4e5c741;
+            border-radius: 12px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+            animation: fadeIn 0.3s ease;
+            object-fit: contain;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .popup-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: #ffcc5c;
+            font-size: 2.5rem;
+            cursor: pointer;
+            transition: color 0.3s ease;
+            z-index: 1001;
+        }
+
+        .popup-close:hover {
+            color: #50e3c2;
+        }
+
+        /* Tablet styles */
+        @media (max-width: 768px) {
+            body {
+                padding: 0.5rem;
+            }
+
+            .album-container {
+                padding: 1.5rem;
+                border-width: 6px;
+                margin: 1rem auto;
+            }
+
+            .photo-grid {
+                height: clamp(200px, 35vw, 300px);
+            }
+
+            .photo {
+                width: clamp(100px, 18vw, 150px);
+                height: clamp(125px, 22vw, 190px);
+            }
+
+            .photo:hover {
+                transform: scale(1.02);
+            }
+
+            .text-box {
+                padding: 1rem;
+                min-height: 120px;
+                clip-path: polygon(
+                    8% 0%, 
+                    82% 4%, 
+                    92% 10%, 
+                    100% 18%, 
+                    95% 28%, 
+                    100% 45%, 
+                    92% 60%, 
+                    96% 75%, 
+                    88% 88%, 
+                    80% 96%, 
+                    65% 98%, 
+                    45% 100%, 
+                    20% 95%, 
+                    10% 88%, 
+                    5% 80%, 
+                    0% 65%, 
+                    3% 45%, 
+                    0% 25%, 
+                    5% 12%
+                );
+            }
+
+            .text-box .torn-piece-1 {
+                width: 15px;
+                height: 25px;
+            }
+
+            .text-box .torn-piece-2 {
+                width: 20px;
+                height: 15px;
+            }
+
+            .text-box .torn-piece-3 {
+                width: 22px;
+                height: 12px;
+            }
+
+            .text-box .torn-piece-4 {
+                width: 12px;
+                height: 20px;
+            }
+        }
+
+        /* Mobile styles */
+        @media (max-width: 640px) {
+            body {
+                padding: 0.25rem;
+                align-items: flex-start;
+                padding-top: 1rem;
+            }
+
+            .album-container {
+                padding: 1rem;
+                border-width: 4px;
+                margin: 0.5rem auto;
+                max-width: 100%;
+            }
+
+            .photo-grid {
+                height: clamp(180px, 30vw, 250px);
+                margin-bottom: 1.5rem;
+            }
+
+            .photo {
+                width: clamp(80px, 20vw, 120px);
+                height: clamp(100px, 25vw, 150px);
+            }
+
+            .photo-1 { left: 2%; top: 15%; }
+            .photo-2 { left: 20%; top: 35%; }
+            .photo-3 { left: 40%; top: 10%; }
+            .photo-4 { left: 60%; top: 30%; }
+            .photo-5 { left: 78%; top: 50%; }
+
+            .text-box {
+                padding: 0.75rem;
+                min-height: 100px;
+                font-size: 0.875rem;
+                clip-path: polygon(
+                    10% 0%, 
+                    80% 5%, 
+                    90% 12%, 
+                    100% 22%, 
+                    93% 32%, 
+                    100% 48%, 
+                    90% 65%, 
+                    94% 78%, 
+                    85% 90%, 
+                    75% 95%, 
+                    60% 98%, 
+                    40% 100%, 
+                    18% 93%, 
+                    8% 85%, 
+                    3% 75%, 
+                    0% 60%, 
+                    5% 42%, 
+                    0% 28%, 
+                    7% 15%
+                );
+            }
+
+            .text-box .torn-piece-1 {
+                width: 12px;
+                height: 20px;
+            }
+
+            .text-box .torn-piece-2 {
+                width: 15px;
+                height: 12px;
+            }
+
+            .text-box .torn-piece-3 {
+                width: 18px;
+                height: 10px;
+            }
+
+            .text-box .torn-piece-4 {
+                width: 10px;
+                height: 15px;
+            }
+
+            .popup-close {
+                top: 10px;
+                right: 10px;
+                font-size: 2rem;
+            }
+
+            .popup img {
+                border-width: 4px;
+            }
+        }
+
+        /* Very small mobile devices */
+        @media (max-width: 360px) {
+            .album-container {
+                padding: 0.75rem;
+                border-width: 3px;
+            }
+
+            .photo-grid {
+                height: clamp(150px, 25vw, 200px);
+            }
+
+            .photo {
+                width: clamp(60px, 22vw, 100px);
+                height: clamp(75px, 28vw, 125px);
+            }
+
+            .text-box {
+                padding: 0.5rem;
+                min-height: 80px;
+                font-size: 0.8rem;
+                clip-path: polygon(
+                    12% 0%, 
+                    78% 6%, 
+                    88% 15%, 
+                    100% 25%, 
+                    90% 35%, 
+                    100% 50%, 
+                    88% 68%, 
+                    92% 82%, 
+                    82% 92%, 
+                    70% 96%, 
+                    55% 98%, 
+                    35% 100%, 
+                    15% 90%, 
+                    6% 82%, 
+                    0% 70%, 
+                    2% 55%, 
+                    0% 35%, 
+                    8% 20%
+                );
+            }
+
+            .text-box .torn-piece-1 {
+                width: 10px;
+                height: 15px;
+            }
+
+            .text-box .torn-piece-2 {
+                width: 12px;
+                height: 10px;
+            }
+
+            .text-box .torn-piece-3 {
+                width: 15px;
+                height: 8px;
+            }
+
+            .text-box .torn-piece-4 {
+                width: 8px;
+                height: 12px;
+            }
+        }
+
+        /* Landscape orientation on mobile */
+        @media (max-width: 896px) and (orientation: landscape) {
+            body {
+                align-items: flex-start;
+                padding-top: 0.5rem;
+            }
+
+            .album-container {
+                margin: 0.5rem auto;
+            }
+
+            .photo-grid {
+                height: clamp(120px, 20vw, 200px);
+            }
+
+            .photo {
+                width: clamp(80px, 12vw, 120px);
+                height: clamp(100px, 15vw, 150px);
+            }
+
+            h1 {
+                margin-bottom: 1rem;
+            }
+
+            .text-box {
+                min-height: 80px;
+                clip-path: polygon(
+                    15% 0%, 
+                    75% 8%, 
+                    85% 18%, 
+                    100% 30%, 
+                    88% 40%, 
+                    100% 55%, 
+                    85% 72%, 
+                    90% 85%, 
+                    80% 95%, 
+                    65% 98%, 
+                    50% 100%, 
+                    30% 97%, 
+                    12% 88%, 
+                    3% 80%, 
+                    0% 65%, 
+                    5% 50%, 
+                    0% 30%, 
+                    10% 15%
+                );
+            }
+
+            .text-box .torn-piece-1 {
+                width: 8px;
+                height: 12px;
+            }
+
+            .text-box .torn-piece-2 {
+                width: 10px;
+                height: 8px;
+            }
+
+            .text-box .torn-piece-3 {
+                width: 12px;
+                height: 6px;
+            }
+
+            .text-box .torn-piece-4 {
+                width: 6px;
+                height: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="album-container">
+        <div class="photo-grid">
+            <div class="photo photo-1"><img src="/asset/19page.jpg" alt="Memory 1"></div>
+            <div class="photo photo-2"><img src="/asset/19page1.jpg" alt="Memory 2"></div>
+            <div class="photo photo-3"><img src="/asset/19page2.jpg" alt="Memory 3"></div>
+            <div class="photo photo-4"><img src="/asset/19page3.jpg" alt="Memory 4"></div>
+            <div class="photo photo-5"><img src="/asset/19page4.jpg" alt="Memory 5"></div>
+        </div>
+        <div class="text-box">
+            <div class="torn-piece torn-piece-1"></div>
+            <div class="torn-piece torn-piece-2"></div>
+            <div class="torn-piece torn-piece-3"></div>
+            <div class="torn-piece torn-piece-4"></div>
+            "A paper camera..some paper photos..but my feelings for you is real and you are as colorfull as you in my heart..Every photo of you makes me smile girl...I cherrish you always"
+        </div>
+    </div>
+
+    <div class="popup" id="imagePopup">
+        <span class="popup-close"></span>
+        <img src="" alt="Popup Image">
+    </div>
+
+    <script>
+        const photos = document.querySelectorAll('.photo img');
+        const popup = document.getElementById('imagePopup');
+        const popupImg = popup.querySelector('img');
+        const closeBtn = popup.querySelector('.popup-close');
+
+        photos.forEach(img => {
+            img.addEventListener('click', () => {
+                popupImg.src = img.src;
+                popup.style.display = 'flex';
+            });
+        });
+
+        closeBtn.addEventListener('click', () => {
+            popup.style.display = 'none';
+        });
+
+        popup.addEventListener('click', (e) => {
+            if (e.target === popup) {
+                popup.style.display = 'none';
+            }
+        });
+
+        // Prevent zoom on double-tap for iOS
+        let lastTouchEnd = 0;
+        document.addEventListener('touchend', function (event) {
+            const now = (new Date()).getTime();
+            if (now - lastTouchEnd <= 300) {
+                event.preventDefault();
+            }
+            lastTouchEnd = now;
+        }, false);
+    </script>
+</body>
+
+</html>
