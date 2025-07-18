@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Rotating Cube Photo Frame</title>
+    <style>
+
+        
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Funnel+Sans:ital,wght@0,300..800;1,300..800&family=Mona+Sans:ital,wght@0,200..900;1,200..900&display=swap'); 
+ 
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+             font-family: "Dancing Script", cursive; 
+            /* background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); */
+            background: #eb8fb2;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            overflow: hidden;
+        }
+
+        .container {
+            perspective: 1200px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            width: 100%;
+            padding-top: 40px;
+        }
+
+        .heading {
+            text-align: center;
+            margin-bottom: 30px;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .heading h1 {
+            font-size: 2.8rem;
+            font-weight: bold;
+            margin-bottom: 12px;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #f9ca24);
+            background-size: 400% 400%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientText 3s ease infinite;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .heading p {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            font-weight: 500;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        @keyframes gradientText {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .cube-container {
+            position: relative;
+            width: 280px;
+            height: 280px;
+            transform-style: preserve-3d;
+            transform: rotateX(-15deg) rotateY(15deg);
+            transition: transform 0.1s ease-out;
+            margin-bottom: 30px;
+            cursor: grab;
+        }
+
+        .cube-container:active {
+            cursor: grabbing;
+        }
+
+        .cube-container.rotating {
+            animation: continuousRotate 10s linear infinite;
+        }
+
+        @keyframes continuousRotate {
+            0% { transform: rotateX(-15deg) rotateY(15deg); }
+            100% { transform: rotateX(-15deg) rotateY(375deg); }
+        }
+
+        .cube-face {
+            position: absolute;
+            width: 280px;
+            height: 280px;
+            background: #fff;
+            /* border: 12px solid #3C2415; */
+            border: 2px solid rgb(182, 182, 202) ;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backface-visibility: hidden;
+            border-radius: 3px;
+        }
+
+        .cube-face img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 2px;
+        }
+
+        .cube-face .placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* Cube face positioning - This creates the actual cube structure */
+        .front {
+            transform: translateZ(140px);
+            background: linear-gradient(135deg, #FF6B6B, #FF8E8E);
+        }
+
+        .back {
+            transform: translateZ(-140px) rotateY(180deg);
+            background: linear-gradient(135deg, #4A90E6, #6BB6FF);
+        }
+
+        .right {
+            transform: rotateY(90deg) translateZ(140px);
+            background: linear-gradient(135deg, #6EE700, #8EFF20);
+        }
+
+        .left {
+            transform: rotateY(-90deg) translateZ(140px);
+            background: linear-gradient(135deg, #FFD700, #FFF020);
+        }
+
+        .top {
+            transform: rotateX(90deg) translateZ(140px);
+            background: linear-gradient(135deg, #B765DA, #D785FF);
+        }
+
+        .bottom {
+            transform: rotateX(-90deg) translateZ(140px);
+            background: linear-gradient(135deg, #FF9500, #FFB520);
+        }
+
+        .auto-rotate {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(255,255,255,0.15);
+            padding: 15px 25px;
+            border-radius: 30px;
+            backdrop-filter: blur(15px);
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255,255,255,0.3);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+            z-index: 1000;
+        }
+
+        .auto-rotate:hover {
+            background: rgba(255,255,255,0.2);
+            transform: scale(1.05);
+        }
+
+        .auto-rotate.active {
+            background: rgba(76, 175, 80, 0.3);
+            border-color: #4caf50;
+        }
+
+        .cursor-mode {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background: rgba(255,255,255,0.15);
+            padding: 15px 25px;
+            border-radius: 30px;
+            backdrop-filter: blur(15px);
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255,255,255,0.3);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+            z-index: 1000;
+        }
+
+        .cursor-mode:hover {
+            background: rgba(255,255,255,0.2);
+            transform: scale(1.05);
+        }
+
+        .cursor-mode.active {
+            background: rgba(33, 150, 243, 0.3);
+            border-color: #2196f3;
+        }
+
+        .description-box {
+            background: rgba(255, 255, 255, 0.15);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            padding: 20px 30px;
+            max-width: 500px;
+            text-align: center;
+            color: white;
+            margin-top: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        }
+
+        .description-box h3 {
+            font-size: 1.5rem;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #fff;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+
+        .description-box p {
+            font-size: 1.1rem;
+            line-height: 1.4;
+            opacity: 0.9;
+            margin: 0;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding-top: 30px;
+            }
+
+            .heading h1 {
+                font-size: 2.2rem;
+                letter-spacing: 1px;
+            }
+
+            .heading p {
+                font-size: 1.1rem;
+            }
+
+            .cube-container {
+                width: 220px;
+                height: 220px;
+            }
+
+            .cube-face {
+                width: 220px;
+                height: 220px;
+                border-width: 10px;
+            }
+
+            .description-box {
+                max-width: 90%;
+                padding: 15px 20px;
+            }
+
+            .description-box h3 {
+                font-size: 1.2rem;
+            }
+
+            .description-box p {
+                font-size: 0.99rem;
+            }
+
+            .front { transform: translateZ(110px); }
+            .back { transform: translateZ(-110px) rotateY(180deg); }
+            .right { transform: rotateY(90deg) translateZ(110px); }
+            .left { transform: rotateY(-90deg) translateZ(110px); }
+            .top { transform: rotateX(90deg) translateZ(110px); }
+            .bottom { transform: rotateX(-90deg) translateZ(110px); }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding-top: 20px;
+            }
+
+            .heading h1 {
+                font-size: 2rem;
+                letter-spacing: 1px;
+            }
+
+            .heading p {
+                font-size: 1rem;
+            }
+
+            .cube-container {
+                width: 180px;
+                height: 180px;
+            }
+
+            .cube-face {
+                width: 180px;
+                height: 180px;
+                border-width: 8px;
+            }
+
+            .description-box {
+                padding: 12px 16px;
+            }
+
+            .description-box h3 {
+                font-size: 1.1rem;
+            }
+
+            .description-box p {
+                font-size: 0.95rem;
+            }
+
+            .front { transform: translateZ(90px); }
+            .back { transform: translateZ(-90px) rotateY(180deg); }
+            .right { transform: rotateY(90deg) translateZ(90px); }
+            .left { transform: rotateY(-90deg) translateZ(90px); }
+            .top { transform: rotateX(90deg) translateZ(90px); }
+            .bottom { transform: rotateX(-90deg) translateZ(90px); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container" >
+        <div class="auto-rotate" id="autoRotate" style="display: none;">
+            🔄 Auto Rotate
+        </div>
+
+        <div class="cursor-mode" id="cursorMode" style="display: none;">
+            🖱️ Cursor Mode
+        </div>
+
+        <div class="heading">
+            <h1>MY SELFIE QUEEN </h1> 
+            <p>not just pictures…also moods, moments, memories😘</p>
+        </div>
+
+        <br><br>
+        <div class="cube-container" id="cubeContainer" style="z-index: 3;">
+            <div class="cube-face front" data-face="front">
+                 
+                  <img src="/asset/k_letter_one.jpg" alt="Forest"> 
+            </div>
+            <div class="cube-face back" data-face="back">
+              
+             <img src="/asset/cube15.jpg" alt="Beach">
+              
+            </div>
+            <div class="cube-face right" data-face="right">
+                <img src="/asset/cube13.jpg" alt="Nature">
+            </div>
+            <div class="cube-face left" data-face="left">
+                <img src="/asset/o_letter_one.jpg" alt="Mountains">
+            </div>
+            <div class="cube-face top" data-face="top">
+                <img src="/asset/cube4.jpg" alt="Ocean">
+            </div>
+            <div class="cube-face bottom" data-face="bottom">
+                <img src="/asset/k_letter_three.jpg" alt="Sunset">
+            </div>
+ </div>
+             
+        <div class="description-box" style="z-index: 1;">
+            <h3></h3>
+            <p>
+                 Every side capturing a smile, an emotion with you. My lady who is in her different posses and moods...This is not a photo cube,this is my world in motion..Always in my thoughts, in heartbeats and in quiet hopes.
+            </p>
+        </div>
+    </div>
+
+    <script>
+        let autoRotating = false;
+        let cursorMode = false;
+
+        const cubeContainer = document.getElementById('cubeContainer');
+        const autoRotateBtn = document.getElementById('autoRotate');
+        const cursorModeBtn = document.getElementById('cursorMode');
+
+        function toggleAutoRotate() {
+            autoRotating = !autoRotating;
+            
+            if (autoRotating) {
+                cubeContainer.classList.add('rotating');
+                autoRotateBtn.classList.add('active');
+                autoRotateBtn.textContent = '⏸️ Stop Auto';
+                
+                // Disable cursor mode when auto-rotate is active
+                if (cursorMode) {
+                    toggleCursorMode();
+                }
+            } else {
+                cubeContainer.classList.remove('rotating');
+                autoRotateBtn.classList.remove('active');
+                autoRotateBtn.textContent = '🔄 Auto Rotate';
+            }
+        }
+
+        function toggleCursorMode() {
+            cursorMode = !cursorMode;
+            
+            if (cursorMode) {
+                cursorModeBtn.classList.add('active');
+                cursorModeBtn.textContent = '🖱️ Active';
+                
+                // Disable auto-rotate when cursor mode is active
+                if (autoRotating) {
+                    toggleAutoRotate();
+                }
+            } else {
+                cursorModeBtn.classList.remove('active');
+                cursorModeBtn.textContent = '🖱️ Cursor Mode';
+                // Reset to default position
+                cubeContainer.style.transform = 'rotateX(-15deg) rotateY(15deg)';
+            }
+        }
+
+        function handleMouseMove(event) {
+            if (!cursorMode || autoRotating) return;
+            
+            const rect = cubeContainer.getBoundingClientRect();
+            const centerX = rect.left + rect.width / 2;
+            const centerY = rect.top + rect.height / 2;
+            
+            const mouseX = event.clientX;
+            const mouseY = event.clientY;
+            
+            // Calculate the rotation based on mouse position relative to cube center
+            const rotateY = ((mouseX - centerX) / window.innerWidth) * 360;
+            const rotateX = ((mouseY - centerY) / window.innerHeight) * -360;
+            
+            // Apply the rotation with some base rotation for better 3D effect
+            cubeContainer.style.transform = `rotateX(${-15 + rotateX}deg) rotateY(${15 + rotateY}deg)`;
+        }
+
+        // Add event listeners
+        autoRotateBtn.addEventListener('click', toggleAutoRotate);
+        cursorModeBtn.addEventListener('click', toggleCursorMode);
+        document.addEventListener('mousemove', handleMouseMove);
+
+        // Enable cursor mode by default
+        toggleCursorMode();
+    </script>
+</body>
+</html>

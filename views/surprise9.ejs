@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Song for My Love</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Dancing+Script:wght@400;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: white;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        /* Header Section */
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            animation: fadeInDown 1s ease-out;
+        }
+        
+        .main-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 3.5rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, #ff6b6b, #ffd93d, #6bcf7f, #4ecdc4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .subtitle {
+            font-size: 1.5rem;
+            font-weight: 300;
+            color: #f8f9fa;
+            opacity: 0.9;
+            margin-bottom: 10px;
+        }
+        
+        .dedication {
+            font-size: 1.1rem;
+            font-weight: 400;
+            color: #e9ecef;
+            opacity: 0.8;
+            font-style: italic;
+        }
+        
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+        
+        /* Image Container */
+        .image-container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            animation: fadeInUp 1s ease-out 0.3s both;
+        }
+        
+        .image-wrapper {
+            position: relative;
+            max-width: 100%;
+            max-height: 60vh;
+            /* border-radius: 20px; */
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            transition: transform 0.3s ease;
+        }
+        
+        .image-wrapper:hover {
+            transform: scale(1.02);
+        }
+        
+        .image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        
+        .image-placeholder {
+            width: 400px;
+            height: 600px;
+            background: linear-gradient(45deg, #ff6b6b, #ffd93d);
+            /* border-radius: 20px; */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            text-align: center;
+            /* padding: 20px; */
+        }
+        
+        /* Music Player */
+        .music-player {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            animation: fadeInUp 1s ease-out 0.6s both;
+        }
+        
+        .player-header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        
+        .song-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #fff;
+        }
+        
+        .artist-name {
+            font-size: 1.1rem;
+            color: #e9ecef;
+            opacity: 0.8;
+        }
+        
+        .player-controls {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+        
+        .control-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: white;
+            font-size: 18px;
+        }
+        
+        .control-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.1);
+        }
+        
+        .play-btn {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(45deg, #ff6b6b, #ffd93d);
+            font-size: 24px;
+        }
+        
+        .play-btn:hover {
+            background: linear-gradient(45deg, #ff5252, #ffcc02);
+            transform: scale(1.1);
+        }
+        
+        .progress-section {
+            margin-bottom: 20px;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 3px;
+            overflow: hidden;
+            margin-bottom: 10px;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(45deg, #ff6b6b, #ffd93d);
+            width: 0%;
+            transition: width 0.1s ease;
+        }
+        
+        .time-info {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            color: #e9ecef;
+            opacity: 0.7;
+        }
+        
+        .volume-section {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            justify-content: center;
+        }
+        
+        .volume-icon {
+            color: #e9ecef;
+            font-size: 18px;
+        }
+        
+        .volume-slider {
+            width: 120px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 2px;
+            outline: none;
+            cursor: pointer;
+        }
+        
+        /* Animations */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        .playing {
+            animation: pulse 2s infinite;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            
+            .main-title {
+                font-size: 2.5rem;
+            }
+            
+            .subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .image-wrapper {
+                max-height: 50vh;
+            }
+            
+            .image-placeholder {
+                width: 300px;
+                height: 450px;
+            }
+            
+            .music-player {
+                padding: 20px;
+            }
+            
+            .song-title {
+                font-size: 1.5rem;
+            }
+            
+            .player-controls {
+                gap: 15px;
+            }
+            
+            .control-btn {
+                width: 45px;
+                height: 45px;
+            }
+            
+            .play-btn {
+                width: 60px;
+                height: 60px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .main-title {
+                font-size: 2rem;
+            }
+            
+            .subtitle {
+                font-size: 1rem;
+            }
+            
+            .image-placeholder {
+                width: 250px;
+                height: 350px;
+            }
+            
+            .music-player {
+                padding: 15px;
+            }
+            
+            .volume-section {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header Section -->
+        <div class="header">
+            <h1 class="main-title">Dedicated For You..My girl </h1>
+            <!-- <p class="subtitle">A CustomizedFor My Baby</p> -->
+            <p class="dedication">Made with love, just for you ❤️</p>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Image Container -->
+            <div class="image-container">
+                <div class="image-wrapper">
+                    <div class="image-placeholder">
+                    
+                            <img src="/asset/customsong.jpg" alt="For My Love">
+                        
+                    
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Music Player -->
+            <div class="music-player">
+                <div class="player-header">
+                    <h2 class="song-title">Meri world.wav</h2>
+                    <p class="artist-name">creator:  its me..</p>
+                </div>
+                
+                <div class="player-controls">
+                    <button class="control-btn" id="prevBtn">⏮</button>
+                    <button class="control-btn play-btn" id="playBtn">▶</button>
+                    <button class="control-btn" id="nextBtn">⏭</button>
+                </div>
+                
+                <div class="progress-section">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                    <div class="time-info">
+                        <span id="currentTime">0:00</span>
+                        <span id="duration">0:00</span>
+                    </div>
+                </div>
+                
+                <div class="volume-section">
+                    <span class="volume-icon">🔊</span>
+                    <input type="range" class="volume-slider" id="volumeSlider" min="0" max="100" value="70">
+                </div>
+                
+                <audio id="audioPlayer" preload="metadata">
+                    <source src="/asset/audios/life_jyoti.mp3" type="audio/mpeg">
+                    <!-- <source src="your-song.ogg" type="audio/ogg"> -->
+                    Your browser does not support the audio element.
+                </audio>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Music Player Functionality
+        const audio = document.getElementById('audioPlayer');
+        const playBtn = document.getElementById('playBtn');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const progressFill = document.getElementById('progressFill');
+        const currentTimeSpan = document.getElementById('currentTime');
+        const durationSpan = document.getElementById('duration');
+        const volumeSlider = document.getElementById('volumeSlider');
+        
+        let isPlaying = false;
+        
+        // Format time helper
+        function formatTime(seconds) {
+            const mins = Math.floor(seconds / 60);
+            const secs = Math.floor(seconds % 60);
+            return `${mins}:${secs.toString().padStart(2, '0')}`;
+        }
+        
+        // Play/Pause functionality
+        playBtn.addEventListener('click', () => {
+            if (isPlaying) {
+                audio.pause();
+                playBtn.innerHTML = '▶';
+                playBtn.classList.remove('playing');
+            } else {
+                audio.play();
+                playBtn.innerHTML = '⏸';
+                playBtn.classList.add('playing');
+            }
+            isPlaying = !isPlaying;
+        });
+        
+        // Update progress bar
+        audio.addEventListener('timeupdate', () => {
+            if (audio.duration) {
+                const progress = (audio.currentTime / audio.duration) * 100;
+                progressFill.style.width = progress + '%';
+                currentTimeSpan.textContent = formatTime(audio.currentTime);
+            }
+        });
+        
+        // Set duration when loaded
+        audio.addEventListener('loadedmetadata', () => {
+            durationSpan.textContent = formatTime(audio.duration);
+        });
+        
+        // Volume control
+        volumeSlider.addEventListener('input', (e) => {
+            audio.volume = e.target.value / 100;
+        });
+        
+        // Set initial volume
+        audio.volume = 0.7;
+        
+        // Reset when song ends
+        audio.addEventListener('ended', () => {
+            playBtn.innerHTML = '▶';
+            playBtn.classList.remove('playing');
+            isPlaying = false;
+            progressFill.style.width = '0%';
+            currentTimeSpan.textContent = '0:00';
+        });
+        
+        // Progress bar click to seek
+        document.querySelector('.progress-bar').addEventListener('click', (e) => {
+            if (audio.duration) {
+                const rect = e.currentTarget.getBoundingClientRect();
+                const clickX = e.clientX - rect.left;
+                const width = rect.width;
+                const seekTime = (clickX / width) * audio.duration;
+                audio.currentTime = seekTime;
+            }
+        });
+        
+        // Placeholder for prev/next buttons
+        prevBtn.addEventListener('click', () => {
+            audio.currentTime = 0;
+        });
+        
+        nextBtn.addEventListener('click', () => {
+            // Add next song functionality here
+            console.log('Next song functionality can be added here');
+        });
+    </script>
+</body>
+</html>

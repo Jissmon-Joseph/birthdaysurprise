@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>O - Ocean of Opportunities | JYOTI KUSH</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #0f3460, #16537e, #1e6091, #2196f3);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+            color: #e3f2fd;
+        }
+
+        /* Ocean wave animation background */
+        .wave-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            background:
+                radial-gradient(ellipse at 20% 80%, rgba(33, 150, 243, 0.2) 0%, transparent 70%),
+                radial-gradient(ellipse at 80% 20%, rgba(30, 96, 145, 0.15) 0%, transparent 60%),
+                radial-gradient(ellipse at 40% 40%, rgba(21, 101, 192, 0.1) 0%, transparent 50%);
+            animation: oceanFlow 20s ease-in-out infinite alternate;
+        }
+
+        @keyframes oceanFlow {
+            0% {
+                transform: translateX(0%) translateY(0%) rotate(0deg);
+                opacity: 0.3;
+            }
+
+            50% {
+                transform: translateX(2%) translateY(-1%) rotate(1deg);
+                opacity: 0.6;
+            }
+
+            100% {
+                transform: translateX(-2%) translateY(1%) rotate(-1deg);
+                opacity: 0.4;
+            }
+        }
+
+        /* Floating bubbles with gentle movement */
+        .bubble {
+            position: absolute;
+            background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.8), rgba(33, 150, 243, 0.3));
+            border-radius: 50%;
+            animation: bubbleFloat 15s ease-in-out infinite;
+            box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.3);
+        }
+
+        .bubble:nth-child(1) {
+            width: 20px;
+            height: 20px;
+            top: 70%;
+            left: 15%;
+            animation-delay: 0s;
+        }
+
+        .bubble:nth-child(2) {
+            width: 15px;
+            height: 15px;
+            top: 20%;
+            right: 25%;
+            animation-delay: 3s;
+        }
+
+        .bubble:nth-child(3) {
+            width: 25px;
+            height: 25px;
+            bottom: 20%;
+            left: 40%;
+            animation-delay: 6s;
+        }
+
+        .bubble:nth-child(4) {
+            width: 18px;
+            height: 18px;
+            top: 50%;
+            right: 15%;
+            animation-delay: 9s;
+        }
+
+        .bubble:nth-child(5) {
+            width: 12px;
+            height: 12px;
+            top: 30%;
+            left: 60%;
+            animation-delay: 12s;
+        }
+
+        @keyframes bubbleFloat {
+
+            0%,
+            100% {
+                transform: translateY(0px) translateX(0px) scale(1);
+                opacity: 0.4;
+            }
+
+            25% {
+                transform: translateY(-30px) translateX(10px) scale(1.1);
+                opacity: 0.7;
+            }
+
+            50% {
+                transform: translateY(-60px) translateX(-5px) scale(0.9);
+                opacity: 0.8;
+            }
+
+            75% {
+                transform: translateY(-40px) translateX(15px) scale(1.05);
+                opacity: 0.6;
+            }
+        }
+
+        .container {
+            position: relative;
+            z-index: 10;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Header with flowing design */
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 2rem 0;
+            animation: flowIn 2s ease-out;
+        }
+
+        .header-content {
+            flex: 1;
+        }
+
+        .page-title {
+            font-size: 3rem;
+            color: #64b5f6;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+            letter-spacing: 1px;
+            font-weight: bold;
+            position: relative;
+        }
+
+        .page-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #2196f3, #64b5f6, #90caf9);
+            animation: titleUnderline 3s ease-out 0.5s both;
+        }
+
+        @keyframes titleUnderline {
+            to {
+                width: 60%;
+            }
+        }
+
+        .subtitle {
+            font-size: 1.3rem;
+            color: #90caf9;
+            font-style: italic;
+            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2);
+            animation: subtitleFade 2s ease-out 1s both;
+        }
+
+        @keyframes subtitleFade {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .header-decoration {
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle at 30% 30%, rgba(100, 181, 246, 0.3), rgba(33, 150, 243, 0.1));
+            border-radius: 50%;
+            position: relative;
+            animation: gentleFloat 25s ease-in-out infinite;
+            box-shadow: 0 0 40px rgba(33, 150, 243, 0.3);
+        }
+
+        .header-decoration::before {
+            content: '';
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            right: 15px;
+            bottom: 15px;
+            border: 2px solid rgba(100, 181, 246, 0.5);
+            border-radius: 50%;
+            animation: gentleFloat 20s ease-in-out infinite reverse;
+        }
+
+        .header-decoration::after {
+            content: '';
+            position: absolute;
+            top: 30px;
+            left: 30px;
+            right: 30px;
+            bottom: 30px;
+            border: 1px solid rgba(144, 202, 249, 0.4);
+            border-radius: 50%;
+            animation: gentleFloat 15s ease-in-out infinite;
+        }
+
+        @keyframes gentleFloat {
+
+            0%,
+            100% {
+                transform: rotate(0deg) translateY(0px);
+            }
+
+            25% {
+                transform: rotate(90deg) translateY(-10px);
+            }
+
+            50% {
+                transform: rotate(180deg) translateY(0px);
+            }
+
+            75% {
+                transform: rotate(270deg) translateY(10px);
+            }
+        }
+
+        /* Description with wave-like layout */
+        .description {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 3rem 0;
+            animation: waveRise 2.5s ease-out 0.8s both;
+        }
+
+        .description-content {
+            max-width: 900px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(100, 181, 246, 0.2);
+            border-radius: 30px;
+            padding: 4rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+            transform: rotateX(5deg);
+        }
+
+        /* Enhanced background letter O with ripple effect */
+        .description-content::before {
+            content: 'O';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotateX(-5deg);
+            font-size: 26rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, #64b5f6, #2196f3, #1565c0, #64b5f6);
+            background-size: 400% 400%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            opacity: 0.12;
+            z-index: 1;
+            animation: oceanGradient 8s ease-in-out infinite, letterRipple 12s ease-in-out infinite;
+            pointer-events: none;
+            filter: drop-shadow(0 0 30px rgba(33, 150, 243, 0.3));
+        }
+
+        @keyframes oceanGradient {
+
+            0%,
+            100% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+        }
+
+        @keyframes letterRipple {
+
+            0%,
+            100% {
+                transform: translate(-50%, -50%) rotateX(-5deg) scale(1);
+            }
+
+            25% {
+                transform: translate(-50%, -50%) rotateX(-5deg) scale(1.02);
+            }
+
+            50% {
+                transform: translate(-50%, -50%) rotateX(-5deg) scale(0.98);
+            }
+
+            75% {
+                transform: translate(-50%, -50%) rotateX(-5deg) scale(1.01);
+            }
+        }
+
+        .description-text {
+            font-size: 1.4rem;
+            line-height: 1.8;
+            color: #e1f5fe;
+            text-align: justify;
+            margin-bottom: 2rem;
+            position: relative;
+            z-index: 2;
+            transform: rotateX(-5deg);
+        }
+
+        .highlight {
+            color: #64b5f6;
+            font-weight: bold;
+            text-shadow: 0 0 8px rgba(100, 181, 246, 0.4);
+        }
+
+        /* Diamond and Butterfly shaped image containers */
+        .image-gallery {
+            padding: 4rem 0;
+            animation: gentleRise 3s ease-out 1.5s both;
+        }
+
+        .gallery-container {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        /* Diamond Shape */
+        .diamond-image-card {
+            position: relative;
+            width: 280px;
+            height: 280px;
+            background: linear-gradient(135deg, #64b5f6 0%, #2196f3 50%, #1565c0 100%);
+            transform: rotate(45deg);
+            transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            cursor: pointer;
+            box-shadow: 0 15px 35px rgba(33, 150, 243, 0.3);
+            overflow: hidden;
+            border-radius: 20px;
+            margin: 30px;
+        }
+
+        .diamond-image-card:hover {
+            transform: rotate(45deg) scale(1.1) translateY(-15px);
+            box-shadow: 0 30px 60px rgba(33, 150, 243, 0.5);
+        }
+
+        .diamond-image-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent 0%, rgba(0, 0, 0, 0.1) 50%, transparent 100%);
+            z-index: 2;
+            transition: opacity 0.4s ease;
+            border-radius: 20px;
+        }
+
+        .diamond-image-card:hover::before {
+            opacity: 0.3;
+        }
+
+        .diamond-image-content {
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            right: 8px;
+            bottom: 8px;
+            overflow: hidden;
+            border-radius: 15px;
+            z-index: 1;
+        }
+
+        .diamond-image {
+            width: 140%;
+            height: 140%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+            transform: rotate(-45deg) translate(-15%, -15%);
+            border-radius: 15px;
+        }
+
+        .diamond-image-card:hover .diamond-image {
+            transform: rotate(-45deg) translate(-15%, -15%) scale(1.1);
+        }
+
+        /* Butterfly Shape */
+        .butterfly-image-card {
+            position: relative;
+            width: 320px;
+            height: 240px;
+            background: linear-gradient(135deg, #64b5f6 0%, #2196f3 50%, #1565c0 100%);
+            clip-path: polygon(50% 0%,
+                    61% 35%,
+                    98% 35%,
+                    68% 57%,
+                    79% 91%,
+                    50% 70%,
+                    21% 91%,
+                    32% 57%,
+                    2% 35%,
+                    39% 35%);
+            transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            cursor: pointer;
+            box-shadow: 0 15px 35px rgba(33, 150, 243, 0.3);
+            overflow: hidden;
+            margin: 20px;
+        }
+
+        .butterfly-image-card:hover {
+            transform: scale(1.08) translateY(-10px) rotate(2deg);
+            box-shadow: 0 25px 50px rgba(33, 150, 243, 0.5);
+        }
+
+        .butterfly-image-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(255, 255, 255, 0.1) 0%, transparent 50%, rgba(255, 255, 255, 0.1) 100%);
+            z-index: 2;
+            transition: opacity 0.4s ease;
+            clip-path: polygon(50% 0%,
+                    61% 35%,
+                    98% 35%,
+                    68% 57%,
+                    79% 91%,
+                    50% 70%,
+                    21% 91%,
+                    32% 57%,
+                    2% 35%,
+                    39% 35%);
+        }
+
+        .butterfly-image-card:hover::before {
+            opacity: 0.6;
+        }
+
+        .butterfly-image-content {
+            position: absolute;
+            top: 4px;
+            left: 4px;
+            right: 4px;
+            bottom: 4px;
+            clip-path: polygon(50% 0%,
+                    61% 35%,
+                    98% 35%,
+                    68% 57%,
+                    79% 91%,
+                    50% 70%,
+                    21% 91%,
+                    32% 57%,
+                    2% 35%,
+                    39% 35%);
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .butterfly-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .butterfly-image-card:hover .butterfly-image {
+            transform: scale(1.15) rotate(-2deg);
+        }
+
+        /* Alternative: Hexagon shape option */
+        .hex-image-card {
+            position: relative;
+            width: 260px;
+            height: 300px;
+            background: linear-gradient(135deg, #64b5f6 0%, #2196f3 50%, #1565c0 100%);
+            clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+            transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            cursor: pointer;
+            box-shadow: 0 15px 35px rgba(33, 150, 243, 0.3);
+            overflow: hidden;
+            margin: 20px;
+        }
+
+        .hex-image-card:hover {
+            transform: scale(1.05) translateY(-10px) rotate(2deg);
+            box-shadow: 0 25px 50px rgba(33, 150, 243, 0.5);
+        }
+
+        .hex-image-content {
+            position: absolute;
+            top: 4px;
+            left: 4px;
+            right: 4px;
+            bottom: 4px;
+            clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+            overflow: hidden;
+        }
+
+        .hex-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .hex-image-card:hover .hex-image {
+            transform: scale(1.1) rotate(-2deg);
+        }
+
+        /* Diamond shape option */
+        .diamond-image-card {
+            position: relative;
+            width: 250px;
+            height: 250px;
+            background: linear-gradient(135deg, #64b5f6 0%, #2196f3 50%, #1565c0 100%);
+            transform: rotate(45deg);
+            transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            cursor: pointer;
+            box-shadow: 0 15px 35px rgba(33, 150, 243, 0.3);
+            overflow: hidden;
+            border-radius: 20px;
+            margin: 40px;
+        }
+
+        .diamond-image-card:hover {
+            transform: rotate(45deg) scale(1.1) translateY(-10px);
+            box-shadow: 0 25px 50px rgba(33, 150, 243, 0.5);
+        }
+
+        .diamond-image-content {
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            right: 8px;
+            bottom: 8px;
+            overflow: hidden;
+            border-radius: 15px;
+        }
+
+        .diamond-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+            transform: rotate(-45deg) scale(1.4);
+        }
+
+        .diamond-image-card:hover .diamond-image {
+            transform: rotate(-45deg) scale(1.5);
+        }
+
+        /* Navigation with ocean theme */
+        .navigation {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 100;
+        }
+
+        .nav-btn {
+            background: linear-gradient(45deg, #2196f3, #64b5f6);
+            border: none;
+            border-radius: 50px;
+            padding: 1.2rem 2.5rem;
+            color: white;
+            font-size: 1.1rem;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(33, 150, 243, 0.4);
+            transition: all 0.4s ease;
+            backdrop-filter: blur(10px);
+            font-weight: bold;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(33, 150, 243, 0.6);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                text-align: center;
+                gap: 2rem;
+            }
+
+            .header-decoration {
+                width: 150px;
+                height: 150px;
+            }
+
+            .page-title {
+                font-size: 2.5rem;
+            }
+
+            .description-content {
+                padding: 2.5rem;
+                margin: 0 1rem;
+                transform: rotateX(0deg);
+            }
+
+            .description-content::before {
+                font-size: 16rem;
+                transform: translate(-50%, -50%);
+            }
+
+            .description-text {
+                font-size: 1.2rem;
+                transform: rotateX(0deg);
+            }
+
+            .gallery-container {
+                flex-direction: column;
+                align-items: center;
+                gap: 2rem;
+            }
+
+            .wave-image-card {
+                width: 240px;
+                height: 280px;
+            }
+
+            .hex-image-card {
+                width: 220px;
+                height: 260px;
+            }
+
+            .diamond-image-card {
+                width: 200px;
+                height: 200px;
+                margin: 30px;
+            }
+
+            .container {
+                padding: 1rem;
+            }
+        }
+
+        @keyframes flowIn {
+            from {
+                opacity: 0;
+                transform: translateY(-50px) scale(0.9);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        @keyframes waveRise {
+            from {
+                opacity: 0;
+                transform: translateY(80px) rotateX(10deg);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) rotateX(5deg);
+            }
+        }
+
+        @keyframes gentleRise {
+            from {
+                opacity: 0;
+                transform: translateY(60px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+
+        .wave-image-card {
+            position: relative;
+            width: 280px;
+            height: 320px;
+            background: linear-gradient(135deg, #64b5f6, #2196f3);
+            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(33, 150, 243, 0.4);
+            transition: transform 0.5s ease, box-shadow 0.5s ease;
+            margin: 20px;
+        }
+
+        .wave-image-card:hover {
+            transform: scale(1.05) rotate(2deg);
+            box-shadow: 0 25px 50px rgba(33, 150, 243, 0.6);
+        }
+
+        .wave-image-content {
+            position: absolute;
+            top: 4px;
+            left: 4px;
+            right: 4px;
+            bottom: 4px;
+            overflow: hidden;
+            border-radius: inherit;
+        }
+
+        .wave-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .wave-image-card:hover .wave-image {
+            transform: scale(1.1) rotate(-2deg);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Animated ocean background -->
+    <div class="wave-bg"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+
+    <div class="container">
+        <!-- Header Section -->
+        <header class="header">
+            <div class="header-content">
+                <h1 class="page-title">O-Ocean of emotions</h1>
+                <p class="subtitle">the mystry babygirl</p>
+            </div>
+            <div class="header-decoration"></div>
+        </header>
+
+        <!-- Description Section -->
+        <section class="description">
+            <div class="description-content">
+                <p class="description-text">
+                    Like the vast ocean <span class="highlight">your emotions </span> are so deep and mysterious..may be
+                    the world that you have grown is different than mine and the things that you saw and now see in your
+                    surroundings taught you to hide every emotions behind a smile or not all expressive or look the
+                    world with fear..
+                </p>
+                <p class="description-text">
+                    I just have one thing to you <span class="highlight">I am with you</span>,through the
+                    highs,lows,doubts,happy,silence..I wont judge you and i wont let you alone..you live in me🥰
+            </div>
+        </section>
+
+        <!-- Wave-shaped Image Gallery Section -->
+        <section class="image-gallery">
+            <div class="gallery-container">
+                <!-- Wave-shaped cards (primary option) -->
+                <div class="wave-image-card">
+                    <div class="wave-image-content">
+                        <img src="/asset/o_letter_one.jpg" alt="Ocean Opportunity 1" class="wave-image">
+                    </div>
+                </div>
+                <div class="wave-image-card">
+                    <div class="wave-image-content">
+                        <img src="/asset/o_letter_two.jpg" alt="Ocean Opportunity 2" class="wave-image">
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </div>
+
+    <!-- Navigation -->
+    <!-- <nav class="navigation">
+        <button class="nav-btn" onclick="window.history.back()">← Return to Journey</button>
+    </nav> -->
+
+    <script>
+        // Ocean wave effect on load
+        window.addEventListener('load', function () {
+            document.body.style.opacity = '0';
+            document.body.style.transition = 'opacity 0.8s ease-in-out';
+            setTimeout(() => {
+                document.body.style.opacity = '1';
+            }, 100);
+        });
+
+        // Gentle bubble movement on mouse interaction
+        document.addEventListener('mousemove', function (e) {
+            const bubbles = document.querySelectorAll('.bubble');
+            bubbles.forEach((bubble, index) => {
+                const speed = (index + 1) * 0.015;
+                const x = (e.clientX * speed) / 150;
+                const y = (e.clientY * speed) / 150;
+                bubble.style.transform += ` translate(${x}px, ${y}px)`;
+            });
+        });
+
+        // Enhanced ripple effect for wave image cards
+        document.querySelectorAll('.wave-image-card, .hex-image-card, .diamond-image-card').forEach(card => {
+            card.addEventListener('click', function () {
+                this.style.transform += ' scale(0.98)';
+                setTimeout(() => {
+                    this.style.transform = this.style.transform.replace(' scale(0.98)', '');
+                }, 200);
+            });
+        });
+
+        // Add gentle scroll parallax effect
+        window.addEventListener('scroll', function () {
+            const scrolled = window.pageYOffset;
+            const bg = document.querySelector('.wave-bg');
+            const bubbles = document.querySelectorAll('.bubble');
+
+            bg.style.transform = `translateY(${scrolled * 0.5}px)`;
+
+            bubbles.forEach((bubble, index) => {
+                const speed = (index + 1) * 0.3;
+                bubble.style.transform += ` translateY(${scrolled * speed}px)`;
+            });
+        });
+
+        // Optional: Switch between different shape styles
+        function switchImageStyle(style) {
+            const container = document.querySelector('.gallery-container');
+
+            switch (style) {
+                case 'wave':
+                    container.innerHTML = `
+                        <div class="wave-image-card">
+                            <div class="wave-image-content">
+                                <img src="https://via.placeholder.com/280x320/2196f3/ffffff?text=Ocean+Waves" alt="Ocean Opportunity 1" class="wave-image">
+                            </div>
+                        </div>
+                        <div class="wave-image-card">
+                            <div class="wave-image-content">
+                                <img src="https://via.placeholder.com/280x320/64b5f6/ffffff?text=Deep+Blue" alt="Ocean Opportunity 2" class="wave-image">
+                            </div>
+                        </div>
+                        <div class="wave-image-card">
+                            <div class="wave-image-content">
+                                <img src="four_two.jpg" alt="Ocean Opportunity 3" class="wave-image">
+                            </div>
+                        </div>
+                    `;
+                    break;
+                case 'hex':
+                    container.innerHTML = `
+                        <div class="hex-image-card">
+                            <div class="hex-image-content">
+                                <img src="https://via.placeholder.com/260x300/2196f3/ffffff?text=Ocean+Waves" alt="Ocean Opportunity 1" class="hex-image">
+                            </div>
+                        </div>
+                        <div class="hex-image-card">
+                            <div class="hex-image-content">
+                                <img src="https://via.placeholder.com/260x300/64b5f6/ffffff?text=Deep+Blue" alt="Ocean Opportunity 2" class="hex-image">
+                            </div>
+                        </div>
+                        <div class="hex-image-card">
+                            <div class="hex-image-content">
+                                <img src="four_two.jpg" alt="Ocean Opportunity 3" class="hex-image">
+                            </div>
+                        </div>
+                    `;
+                    break;
+                case 'diamond':
+                    container.innerHTML = `
+                        <div class="diamond-image-card">
+                            <div class="diamond-image-content">
+                                <img src="https://via.placeholder.com/250x250/2196f3/ffffff?text=Ocean+Waves" alt="Ocean Opportunity 1" class="diamond-image">
+                            </div>
+                        </div>
+                        <div class="diamond-image-card">
+                            <div class="diamond-image-content">
+                                <img src="https://via.placeholder.com/250x250/64b5f6/ffffff?text=Deep+Blue" alt="Ocean Opportunity 2" class="diamond-image">
+                            </div>
+                        </div>
+                        <div class="diamond-image-card">
+                            <div class="diamond-image-content">
+                                <img src="four_two.jpg" alt="Ocean Opportunity 3" class="diamond-image">
+                            </div>
+                        </div>
+                    `;
+                    break;
+            }
+        }
+    </script>
+</body>
+
+</html>

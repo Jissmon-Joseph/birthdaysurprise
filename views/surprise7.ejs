@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Section</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            /* background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); */
+            min-height: 100vh;
+            /* background-color: #659ae6; */
+            /* background-image: url('https://thumbs.dreamstime.com/b/winter-mountain-landscape-clear-blue-sky-over-snowy-mountain-peaks-frosty-morning-winter-sunrise-mountains-christmas-131610926.jpg')  center/cover no-repeat fixed; */
+            overflow-x: hidden;
+        }
+
+        /* Animated background particles */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: white;
+            border-radius: 50%;
+            animation: float 20s infinite linear;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
+        }
+
+        /* Main container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+              /* background: rgba(255, 255, 255, 0.1); */
+
+        }
+
+        /* Top Half - Music Player */
+        .music-player-section {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 0;
+        }
+
+        .music-player {
+            background: rgba(255, 255, 255, 0.1);
+            /* backdrop-filter: blur(20px); */
+            border-radius: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 2rem;
+            width: 100%;
+            max-width: 500px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            animation: slideIn 1s ease-out;
+        }
+
+        .music-player:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+        }
+
+        @keyframes slideIn {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .album-art {
+            width: 100%;
+            height: 300px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: white;
+            box-shadow: 
+                0 15px 35px rgba(0, 0, 0, 0.3),
+                inset 0 2px 4px rgba(255, 255, 255, 0.1),
+                inset 0 -2px 4px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .album-art:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 
+                0 20px 40px rgba(0, 0, 0, 0.4),
+                inset 0 2px 4px rgba(255, 255, 255, 0.15),
+                inset 0 -2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .album-art img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 16px;
+            opacity: 0.9;
+            transition: opacity 0.3s ease;
+        }
+
+        .album-art:hover img {
+            opacity: 1;
+        }
+
+        .album-art::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, 
+                rgba(255,255,255,0.1) 0%, 
+                transparent 50%, 
+                rgba(255,255,255,0.05) 100%);
+            border-radius: 16px;
+            pointer-events: none;
+        }
+
+        .album-art::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+            animation: shine 4s infinite;
+            pointer-events: none;
+        }
+
+        /* Placeholder styling when no image */
+        .album-art.no-image {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+        }
+
+        @keyframes shine {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .track-info {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .track-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: white;
+            margin-bottom: 0.5rem;
+        }
+
+        .track-artist {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .progress-container {
+            margin: 1.5rem 0;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 3px;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .progress {
+            height: 100%;
+            background: linear-gradient(90deg, #1db954, #1ed760);
+            width: 0%;
+            transition: width 0.1s linear;
+            border-radius: 3px;
+        }
+
+        .time-info {
+            display: flex;
+            justify-content: space-between;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.8rem;
+            margin-top: 0.5rem;
+        }
+
+        .controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .control-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: white;
+            font-size: 1.2rem;
+        }
+
+        .control-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.1);
+        }
+
+        .play-btn {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #1db954, #1ed760);
+            font-size: 1.5rem;
+        }
+
+        .play-btn:hover {
+            background: linear-gradient(135deg, #1ed760, #1db954);
+        }
+
+        /* Bottom Half - Description */
+        .description-section {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 0;
+        }
+
+        .description-container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 2rem;
+            width: 100%;
+            max-width: 800px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            animation: slideInUp 1s ease-out 0.3s both;
+        }
+
+        @keyframes slideInUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .description-title {
+            font-size: 2rem;
+            font-weight: bold;
+            color: white;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .description-text {
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 700;
+            line-height: 1.7;
+            font-size: 1.1rem;
+            text-align: justify;
+        }
+
+        /* Volume control */
+        .volume-container {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 1rem;
+            justify-content: center;
+        }
+
+        .volume-slider {
+            width: 100px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 2px;
+            outline: none;
+            cursor: pointer;
+        }
+
+        .volume-slider::-webkit-slider-thumb {
+            appearance: none;
+            width: 16px;
+            height: 16px;
+            background: #1db954;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .music-player {
+                padding: 1.5rem;
+            }
+            
+            .album-art {
+                height: 250px;
+                font-size: 2rem;
+            }
+            
+            .track-title {
+                font-size: 1.2rem;
+            }
+            
+            .description-title {
+                font-size: 1.5rem;
+            }
+            
+            .description-text {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<!-- <body style="background-image: url('')  center/cover no-repeat fixed;;"> -->
+   <body style="
+  background: url('/asset/cloudy_mountains_4k_hd.jpg') center/cover no-repeat fixed;
+">
+
+    <div class="bg-animation"></div>
+    
+    <div class="container">
+        <!-- Top Half - Music Player -->
+        <div class="music-player-section">
+            <div class="music-player">
+                <div class="album-art no-image" id="albumArt">
+                    <!-- Replace this div with your image -->
+                    <!-- Example: <img src="your-image-url.jpg" alt="Album Cover"> -->
+                    <img src="/asset/six_surprise.jpg" alt="album cover">
+
+                </div>
+                
+                <div class="track-info">
+                    <div class="track-title">Agar Tum mil jao</div>
+                    <div class="track-artist" style="font-weight: 700;color:#fbf6ff;">Artist:My queen</div>
+                </div>
+                
+                <div class="progress-container">
+                    <div class="progress-bar" id="progressBar">
+                        <div class="progress" id="progress"></div>
+                    </div>
+                    <div class="time-info">
+                        <span id="currentTime">0:00</span>
+                        <span id="duration">2:30</span>
+                    </div>
+                </div>
+                
+                <div class="controls">
+                    <button class="control-btn" id="prevBtn">⏮</button>
+                    <button class="control-btn play-btn" id="playBtn">▶</button>
+                    <button class="control-btn" id="nextBtn">⏭</button>
+                </div>
+                
+                <div class="volume-container">
+                    <span style="color: white;">🔊</span>
+                    <input type="range" class="volume-slider" id="volumeSlider" min="0" max="100" value="50">
+                </div>
+            </div>
+        </div>
+        
+        <!-- Bottom Half - Description -->
+        <div class="description-section">
+            <div class="description-container">
+                <h2 class="description-title">Voice of my soul</h2>
+                <p class="description-text">
+                   My baby...everytime when i hear this song...it reminds me your voice and make me smile with tears
+                   do you remember the night you sang this one for me...i dont have that audio..but in my mind i cherish 
+                   every moment...the warmth i got when i listen to your sound..I cant express myself how happy i am because of you....
+                   Thank you for this wonderful memory my queen..
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <audio id="audioPlayer" loop preload="auto">
+  <source src="/asset/audios/Agar Tum Mil JaoFemale - Zeher 320 Kbps.mp3" type="audio/mpeg" />
+  Your browser does not support the audio element.
+</audio>
+
+
+    <script>
+        // Create animated background particles
+        function createParticles() {
+            const bgAnimation = document.querySelector('.bg-animation');
+            for (let i = 0; i < 50; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 20 + 's';
+                particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
+                bgAnimation.appendChild(particle);
+            }
+        }
+
+        // Audio player functionality
+        const audioPlayer = document.getElementById('audioPlayer');
+        const playBtn = document.getElementById('playBtn');
+        const progressBar = document.getElementById('progressBar');
+        const progress = document.getElementById('progress');
+        const currentTimeSpan = document.getElementById('currentTime');
+        const durationSpan = document.getElementById('duration');
+        const volumeSlider = document.getElementById('volumeSlider');
+
+        let isPlaying = false;
+        let currentTime = 0;
+        let duration = 150; // 2:30 in seconds for demo
+
+        // Auto-play when page loads (with user interaction fallback)
+        window.addEventListener('load', () => {
+            createParticles();
+            // Try to auto-play (may be blocked by browser policy)
+            audioPlayer.play().then(() => {
+                isPlaying = true;
+                playBtn.textContent = '⏸';
+                startProgressUpdate();
+            }).catch(() => {
+                // Auto-play blocked, will play on first user interaction
+                console.log('Auto-play blocked by browser');
+            });
+        });
+
+        // Play/Pause functionality
+        playBtn.addEventListener('click', () => {
+            if (isPlaying) {
+                audioPlayer.pause();
+                playBtn.textContent = '▶';
+                isPlaying = false;
+            } else {
+                audioPlayer.play();
+                playBtn.textContent = '⏸';
+                isPlaying = true;
+                startProgressUpdate();
+            }
+        });
+
+        // Progress bar update
+        function startProgressUpdate() {
+            const interval = setInterval(() => {
+                if (!isPlaying) {
+                    clearInterval(interval);
+                    return;
+                }
+                
+                currentTime += 0.1;
+                if (currentTime >= duration) {
+                    currentTime = 0; // Loop
+                }
+                
+                const progressPercent = (currentTime / duration) * 100;
+                progress.style.width = progressPercent + '%';
+                
+                const minutes = Math.floor(currentTime / 60);
+                const seconds = Math.floor(currentTime % 60);
+                currentTimeSpan.textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+            }, 100);
+        }
+
+        // Progress bar click
+        // progressBar.addEventListener('click', (e) => {
+        //     const rect = progressBar.getBoundingClientRect();
+        //     const clickX = e.clientX - rect.left;
+        //     const progressPercent = clickX / rect.width;
+        //     currentTime = progressPercent * duration;
+            
+        //     const progressWidth = progressPercent * 100;
+        //     progress.style.width = progressWidth + '%';
+            
+        //     const minutes = Math.floor(currentTime / 60);
+        //     const seconds = Math.floor(currentTime % 60);
+        //     currentTimeSpan.textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+        // });
+
+
+
+progressBar.addEventListener('click', (e) => {
+    const rect = progressBar.getBoundingClientRect();
+    const clickX = e.clientX - rect.left;
+    const progressPercent = clickX / rect.width;
+
+    // ✅ Set actual audio playback position
+    if (audioPlayer.duration) {
+        audioPlayer.currentTime = progressPercent * audioPlayer.duration;
+    }
+});
+
+
+
+
+
+        // Volume control
+        volumeSlider.addEventListener('input', (e) => {
+            audioPlayer.volume = e.target.value / 100;
+        });
+
+        // Set initial volume
+        audioPlayer.volume = 0.5;
+
+        // Demo function to show how to add an image
+        function setAlbumArt(imageUrl) {
+            const albumArt = document.getElementById('albumArt');
+            albumArt.innerHTML = `<img src="${imageUrl}" alt="Album Cover">`;
+            albumArt.classList.remove('no-image');
+        }
+
+        // Example usage (uncomment and replace with your image URL):
+        // setAlbumArt('https://your-image-url.jpg');
+        
+        // Or you can directly replace the HTML in the album-art div with:
+        // <img src="your-image-url.jpg" alt="Album Cover">
+        document.getElementById('prevBtn').addEventListener('click', () => {
+            currentTime = 0;
+            progress.style.width = '0%';
+            currentTimeSpan.textContent = '0:00';
+        });
+
+        document.getElementById('nextBtn').addEventListener('click', () => {
+            currentTime = 0;
+            progress.style.width = '0%';
+            currentTimeSpan.textContent = '0:00';
+        });
+
+        // Handle audio events for real audio files
+        audioPlayer.addEventListener('loadedmetadata', () => {
+            duration = audioPlayer.duration;
+            const minutes = Math.floor(duration / 60);
+            const seconds = Math.floor(duration % 60);
+            durationSpan.textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+        });
+
+        audioPlayer.addEventListener('timeupdate', () => {
+            if (audioPlayer.duration) {
+                currentTime = audioPlayer.currentTime;
+                const progressPercent = (currentTime / audioPlayer.duration) * 100;
+                progress.style.width = progressPercent + '%';
+                
+                const minutes = Math.floor(currentTime / 60);
+                const seconds = Math.floor(currentTime % 60);
+                currentTimeSpan.textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+            }
+        });
+
+        audioPlayer.addEventListener('ended', () => {
+            // Auto-loop is handled by the loop attribute
+            currentTime = 0;
+            progress.style.width = '0%';
+            currentTimeSpan.textContent = '0:00';
+        });
+    </script>
+</body>
+</html>

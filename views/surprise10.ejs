@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MY LIFE Magazine - Vogue Edition</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Montserrat:wght@300;400;500;600;700&family=Dancing+Script:wght@700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            transition: opacity 0.5s ease-out;
+        }
+
+        .loading-screen.fade-out {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .loading-text {
+            color: white;
+            font-size: 24px;
+            font-weight: 300;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-top: 3px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .magazine-container {
+            width: 420px;
+            height: 600px;
+            background: white;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+            transform: perspective(1000px) rotateY(-5deg);
+            transition: transform 0.3s ease;
+        }
+
+        .magazine-container:hover {
+            transform: perspective(1000px) rotateY(0deg) scale(1.02);
+        }
+
+        /* Vogue-Style Header */
+        .magazine-header {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 20;
+            background: linear-gradient(180deg, rgba(0,0,0,0.4) 0%, transparent 100%);
+        }
+
+        .magazine-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 48px;
+            font-weight: 900;
+            color: white;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+            letter-spacing: 8px;
+            text-align: center;
+        }
+
+        /* Full Cover Photo */
+        .cover-photo-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .cover-photo {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(1.1) contrast(1.1) saturate(1.2);
+        }
+
+        .photo-placeholder {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 18px;
+            text-align: center;
+        }
+
+        .photo-placeholder img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Season Badge */
+        .season-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            color: #333;
+            padding: 8px 16px;
+            border-radius: 0;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            z-index: 25;
+            text-transform: uppercase;
+        }
+
+        /* Left Side Content */
+        .left-content {
+            position: absolute;
+            top: 120px;
+            left: 20px;
+            width: 180px;
+            z-index: 25;
+        }
+
+        .feature-text {
+            color: white;
+            font-size: 13px;
+            font-weight: 500;
+            line-height: 1.4;
+            margin-bottom: 15px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .feature-text:first-child {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        /* Main Headline */
+        .main-headline {
+            position: absolute;
+            bottom: 100px;
+            left: 20px;
+            right: 20px;
+            z-index: 25;
+        }
+
+        .headline-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 42px;
+            font-weight: 900;
+            color: white;
+            text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.8);
+            line-height: 1.1;
+            margin-bottom: 8px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .subheadline {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 14px;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            opacity: 0.9;
+        }
+
+        /* Bottom Gradient Overlay */
+        .bottom-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 200px;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, transparent 100%);
+            z-index: 15;
+        }
+
+        /* Top Gradient Overlay */
+        .top-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 150px;
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.6) 0%, transparent 100%);
+            z-index: 15;
+        }
+
+        /* Cover Stories Section */
+        .cover-stories {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 20px;
+            color: white;
+            z-index: 25;
+        }
+
+        .main-story {
+            margin-bottom: 15px;
+        }
+
+        .main-story-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 18px;
+            font-weight: 700;
+            color: #ffd700;
+            margin-bottom: 3px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .main-story-subtitle {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.3;
+            font-weight: 400;
+        }
+
+        .side-stories {
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            margin-top: 10px;
+        }
+
+        .side-story {
+            flex: 1;
+        }
+
+        .side-story-title {
+            font-size: 10px;
+            font-weight: 600;
+            color: white;
+            margin-bottom: 2px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .side-story-text {
+            font-size: 9px;
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.2;
+        }
+
+        /* Issue Details */
+        .issue-number {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            color: #333;
+            padding: 8px 16px;
+            border-radius: 0;
+            font-size: 11px;
+            font-weight: 600;
+            z-index: 25;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .price-badge {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            color: #333;
+            padding: 6px 12px;
+            border-radius: 0;
+            font-size: 10px;
+            font-weight: 600;
+            z-index: 25;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Shine Effect */
+        .magazine-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255, 255, 255, 0.2),
+                transparent
+            );
+            animation: shine 4s infinite;
+            z-index: 30;
+            pointer-events: none;
+        }
+
+        @keyframes shine {
+            0% { left: -100%; }
+            50% { left: 100%; }
+            100% { left: 100%; }
+        }
+
+        /* Music Controls */
+        .music-controls {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 100;
+        }
+
+        .music-btn {
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            padding: 12px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            color: #333;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .music-btn:hover {
+            background: white;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 480px) {
+            .magazine-container {
+                width: 90%;
+                height: 500px;
+                transform: none;
+            }
+            
+            .magazine-title {
+                font-size: 36px;
+                letter-spacing: 4px;
+            }
+            
+            .headline-text {
+                font-size: 32px;
+            }
+            
+            .left-content {
+                width: 150px;
+            }
+            
+            .feature-text {
+                font-size: 11px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-text">Loading Premium Magazine...</div>
+        <div class="loading-spinner"></div>
+    </div>
+
+    <!-- Magazine Container -->
+    <div class="magazine-container">
+        <!-- Top Gradient Overlay -->
+        <div class="top-overlay"></div>
+        
+        <!-- Bottom Gradient Overlay -->
+        <div class="bottom-overlay"></div>
+
+        <!-- Cover Photo Container (Full Background) -->
+        <div class="cover-photo-container">
+            <div class="photo-placeholder">
+                <img src="/asset/cube20.jpg" alt="Cover Photo">
+            </div>
+        </div>
+
+        <!-- Magazine Header -->
+        <div class="magazine-header">
+            <div class="magazine-title">MY LIFE</div>
+        </div>
+
+        <!-- Issue Number and Season -->
+        <!-- <div class="issue-number">QUEEN</div> -->
+        <!-- <div class="season-badge">JULY 2025</div> -->
+
+        <!-- Left Side Content -->
+        <!-- <div class="left-content">
+            <div class="feature-text">FIND YOUR BLISS</div>
+            <div class="feature-text">RETHINK, RESHAPE, REFOCUS</div>
+            <div class="feature-text">HEAT WAVE</div>
+            <div class="feature-text">SUMMER FASHION</div>
+            <div class="feature-text">DAWN TO DUSK</div>
+        </div> -->
+
+        <!-- Main Headlines -->
+        <div class="main-headline">
+            <div class="headline-text">JYOTI</div>
+            <!-- <div class="subheadline">"SEE ME FOR ME"</div> -->
+        </div>
+        <br>
+
+        <!-- Price Badge -->
+        <!-- <div class="price-badge">PRICELESS</div> -->
+
+        <!-- Cover Stories -->
+        <div class="cover-stories">
+            <div class="main-story">
+                <div class="main-story-title">INTERVIEW WITH JYOTI</div>
+                <div class="main-story-subtitle">How she conquered my heart and became my everything</div>
+            </div>
+            
+            <div class="side-stories">
+                <div class="side-story">
+                    <div class="side-story-title">BEAUTY SECRETS</div>
+                    <div class="side-story-text">Her smile that lights up my world</div>
+                </div>
+                <div class="side-story">
+                    <div class="side-story-title">LIFE GOALS</div>
+                    <div class="side-story-text">Building dreams together</div>
+                </div>
+                <div class="side-story">
+                    <div class="side-story-title">LOVE STORY</div>
+                    <div class="side-story-text">From strangers to soulmates</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Music Controls -->
+    <!-- <div class="music-controls">
+        <button class="music-btn" onclick="toggleMusic()" id="musicBtn">🎵 Music Loading...</button>
+    </div> -->
+
+    <!-- Background Music -->
+    <!-- <audio id="bgMusic" loop preload="auto">
+        <source src="your-magazine-music.mp3" type="audio/mpeg">
+        <source src="your-magazine-music.ogg" type="audio/ogg">
+    </audio> -->
+
+    <script>
+        let musicPlaying = false;
+        const bgMusic = document.getElementById('bgMusic');
+        const musicBtn = document.getElementById('musicBtn');
+        let musicReady = false;
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Show loading screen for 3 seconds
+            setTimeout(() => {
+                // Hide loading screen
+                document.getElementById('loadingScreen').classList.add('fade-out');
+                
+                // Start music after loading screen fades
+                setTimeout(() => {
+                    startMusic();
+                }, 500);
+            }, 3000);
+
+            // Prepare music
+            bgMusic.addEventListener('canplaythrough', function() {
+                musicReady = true;
+                musicBtn.textContent = '🎵 Play Music';
+            });
+
+            bgMusic.addEventListener('error', function() {
+                musicBtn.textContent = '🎵 Add Music File';
+                console.log('Music file not found. Please add your music file.');
+            });
+        });
+
+        function startMusic() {
+            if (musicReady) {
+                bgMusic.play().then(() => {
+                    musicPlaying = true;
+                    musicBtn.textContent = '🎵 Pause Music';
+                }).catch(e => {
+                    console.log('Autoplay prevented by browser. User interaction required.');
+                    musicBtn.textContent = '🎵 Click to Play';
+                });
+            } else {
+                musicBtn.textContent = '🎵 Music Loading...';
+                // Try again in 1 second
+                setTimeout(startMusic, 1000);
+            }
+        }
+
+        function toggleMusic() {
+            if (!musicReady) {
+                alert('Please add your music file to enable background music!\n\nReplace "your-magazine-music.mp3" in the HTML code with your actual music file path.');
+                return;
+            }
+
+            if (!musicPlaying) {
+                bgMusic.play().then(() => {
+                    musicBtn.textContent = '🎵 Pause Music';
+                    musicPlaying = true;
+                }).catch(e => {
+                    console.log('Music play failed:', e);
+                    alert('Unable to play music. Please check your music file.');
+                });
+            } else {
+                bgMusic.pause();
+                musicBtn.textContent = '🎵 Play Music';
+                musicPlaying = false;
+            }
+        }
+
+        // Volume control (optional)
+        bgMusic.volume = 0.7; // Set to 70% volume
+
+        // Add some interactive effects
+        document.querySelector('.magazine-container').addEventListener('mousemove', function(e) {
+            const rect = this.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+            
+            const rotateX = (y - centerY) / 20;
+            const rotateY = (centerX - x) / 20;
+            
+            this.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`;
+        });
+
+        document.querySelector('.magazine-container').addEventListener('mouseleave', function() {
+            this.style.transform = 'perspective(1000px) rotateY(-5deg)';
+        });
+    </script>
+</body>
+</html>
