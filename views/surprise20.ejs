@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Broken Wooden Pencil Portraits</title>
+<link href="https://fonts.googleapis.com/css2?family=Caveat&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background: url('https://www.transparenttextures.com/patterns/wood-pattern.png') repeat,
+                        linear-gradient(135deg, #868b7a 0%, #1d1b1b 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+            color: #fff;
+        }
+
+        /* Header Section */
+        .header-section {
+            padding: 2rem 1rem;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .main-title {
+            font-size: 24pt;
+            color: #f4f4f4;
+            font-weight: bold;
+            letter-spacing: 3px;
+            margin-bottom: 1rem;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+              font-family: 'Rock Salt', cursive;
+        }
+
+        .main-description {
+            font-size: clamp(0.9rem, 2vw, 1.2rem);
+            color: #e0e0e0;
+            line-height: 1.6;
+            max-width: 700px;
+            margin: 0 auto;
+            font-style: italic;
+            opacity: 0.9;
+        }
+
+        /* Gallery Container */
+        .gallery-wrapper {
+            padding: 3rem 1rem;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Individual Portrait Frames */
+        .portrait-frame {
+            background: #ffffff85; 
+            border-radius: 12px;
+            padding: 1rem;
+            box-shadow: 
+                0 10px 20px rgba(0, 0, 0, 0.4),
+                0 5px 10px rgba(0, 0, 0, 0.3);
+            transition: all 0.4s ease;
+            position: relative;
+            border: 8px solid transparent;
+            background-image: url('https://www.transparenttextures.com/patterns/cracked.png');
+            background-size: cover;
+            background-position: center;
+            border-image: url('https://www.transparenttextures.com/patterns/wood-pattern.png') 30 / 8px / 0 round;
+        }
+
+        .portrait-frame::before {
+            content: '';
+            position: absolute;
+            top: 5%;
+            left: -8px;
+            width: 20px;
+            height: 30px;
+            background: url('https://www.transparenttextures.com/patterns/wood-pattern.png');
+            background-size: cover;
+            opacity: 0.7;
+            clip-path: polygon(0 0, 100% 50%, 0 100%); /* Triangular chip */
+            z-index: 1;
+        }
+
+        .portrait-frame::after {
+            content: '';
+            position: absolute;
+            bottom: 10%;
+            right: -8px;
+            width: 25px;
+            height: 25px;
+            background: url('https://www.transparenttextures.com/patterns/wood-pattern.png');
+            background-size: cover;
+            opacity: 0.6;
+            clip-path: polygon(0 0, 100% 0, 50% 100%); /* Triangular chip */
+            z-index: 1;
+        }
+
+        .portrait-frame:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 
+                0 15px 30px rgba(0, 0, 0, 0.5),
+                0 8px 15px rgba(0, 0, 0, 0.4);
+        }
+
+        .portrait-image {
+            width: 100%;
+            height: 100%;
+            border-radius: 8px;
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: 
+                #71855c;
+        }
+
+        .portrait-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            border-radius: 8px;
+            display: block;
+        }
+
+        /* Text Content Section */
+        .text-section {
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(10px);
+            padding: 2rem 1.5rem;
+            margin: 2rem auto;
+            max-width: 900px;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            text-align: center;
+            font-family: 'Caveat', cursive;
+            font-size: 20pt;
+        }
+
+        .section-title {
+            font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+            color: #f4f4f4;
+            margin-bottom: 1.5rem;
+            font-weight: 400;
+            letter-spacing: 2px;
+        }
+
+        .section-content {
+            color: #e0e0e0;
+            line-height: 1.8;
+            text-align: justify;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .gallery-wrapper {
+                gap: 1.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .gallery-wrapper {
+                flex-direction: column;
+                align-items: center;
+                padding: 2rem 1rem;
+            }
+
+            .portrait-frame::before,
+            .portrait-frame::after {
+                width: 15px;
+                height: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .gallery-wrapper {
+                padding: 1.5rem 0.5rem;
+            }
+
+            .portrait-frame::before,
+            .portrait-frame::after {
+                width: 12px;
+                height: 18px;
+            }
+
+            .main-title {
+                font-size: clamp(1.8rem, 4vw, 2.5rem);
+            }
+
+            .section-title {
+                font-size: clamp(1.5rem, 3vw, 2rem);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <div class="header-section">
+        <h1 class="main-title">YOU..MY FAVOURITE CANVAS</h1>
+                <!-- <h1 class="main-title">Broken Wooden Pencil Portraits</h1> -->
+        <!-- <p class="main-description">Three graphite sketches framed in old, chipped wooden frames with triangular breaks, arranged in a line for desktop and stacked for mobile, evoking a weathered past.</p> -->
+    </div>
+
+    <!-- Gallery Section -->
+    <div class="gallery-wrapper">
+        <div class="portrait-frame frame-1">
+            <div class="portrait-image" data-frame="1">
+                <img src="/asset/20page1.jpg" alt="Portrait 1" onerror="this.src='https://via.placeholder.com/600x800?text=Portrait+1'; this.alt='Fallback Portrait 1';">
+            </div>
+        </div>
+
+        <div class="portrait-frame frame-2">
+            <div class="portrait-image" data-frame="2">
+                <img src="/asset/20page2.jpg" alt="Portrait 2" onerror="this.src='https://via.placeholder.com/600x800?text=Portrait+2'; this.alt='Fallback Portrait 2';">
+            </div>
+        </div>
+
+        <div class="portrait-frame frame-3">
+            <div class="portrait-image" data-frame="3">
+                <img src="/asset/20page3.jpg" alt="Portrait 3" onerror="this.src='https://via.placeholder.com/600x800?text=Portrait+3'; this.alt='Fallback Portrait 3';">
+            </div>
+        </div>
+    </div>
+
+    <!-- Text Section -->
+    <div class="text-section">
+        <!-- <h2 class="section-title">The Beauty of Broken Art</h2> -->
+        <p class="section-content">
+           mari pagali...sorry pagali rajkumari...i dont know how happy happy i am with you...i cant explain that...me uthna bad artist to nai hu..lekin when i draw you i always tries to give my heart and soul...these are all memories i cherrish with you..every line reminds moments with you...love you always..❤️
+        </p>
+        <p class="section-content">
+           
+        </p>
+    </div>
+
+    <script>
+        // Dynamically set frame sizes and smooth entrance animations
+        document.addEventListener('DOMContentLoaded', () => {
+            const gallery = document.querySelector('.gallery-wrapper');
+            const updateFrameSizes = () => {
+                const galleryWidth = gallery.offsetWidth;
+                const maxFrameWidth = window.innerWidth >= 768 ? galleryWidth / 3.5 : galleryWidth * 0.8; // Adjust for desktop vs mobile
+
+                const frames = document.querySelectorAll('.portrait-frame');
+                frames.forEach((frame, index) => {
+                    const img = frame.querySelector('img');
+                    img.addEventListener('load', () => {
+                        const naturalWidth = img.naturalWidth;
+                        const naturalHeight = img.naturalHeight;
+                        const aspectRatio = naturalWidth / naturalHeight;
+
+                        // Calculate frame size based on image dimensions
+                        let frameWidth = Math.min(naturalWidth, maxFrameWidth);
+                        let frameHeight = frameWidth / aspectRatio;
+
+                        // Constrain height to fit viewport
+                        const maxHeight = window.innerHeight * 0.5;
+                        if (frameHeight > maxHeight) {
+                            frameHeight = maxHeight;
+                            frameWidth = frameHeight * aspectRatio;
+                        }
+
+                        // Apply dimensions to frame
+                        frame.style.width = `${frameWidth}px`;
+                        frame.style.height = `${frameHeight}px`;
+                    });
+
+                    // Fallback for image load failure
+                    img.addEventListener('error', () => {
+                        img.src = `https://via.placeholder.com/600x800?text=Portrait+${index + 1}`;
+                        img.alt = `Fallback Portrait ${index + 1}`;
+                        // Set default size for fallback image
+                        frame.style.width = window.innerWidth >= 768 ? `${maxFrameWidth}px` : '80%';
+                        frame.style.height = window.innerWidth >= 768 ? `${maxFrameWidth * 4 / 3}px` : `${(galleryWidth * 0.8) * 4 / 3}px`;
+                    });
+
+                    // Trigger load event for cached images
+                    if (img.complete) {
+                        img.dispatchEvent(new Event('load'));
+                    }
+
+                    // Smooth entrance animation
+                    frame.style.opacity = '0';
+                    frame.style.transform = 'translateY(30px)';
+                    setTimeout(() => {
+                        frame.style.transition = 'all 0.8s ease';
+                        frame.style.opacity = '1';
+                        frame.style.transform = 'translateY(0)';
+                    }, (index + 1) * 200);
+                });
+            };
+
+            // Initial sizing
+            updateFrameSizes();
+
+            // Update sizes on window resize
+            window.addEventListener('resize', updateFrameSizes);
+
+            // Text section animation
+            const textSection = document.querySelector('.text-section');
+            setTimeout(() => {
+                textSection.style.opacity = '0';
+                textSection.style.transform = 'translateY(20px)';
+                textSection.style.transition = 'all 0.8s ease';
+                setTimeout(() => {
+                    textSection.style.opacity = '1';
+                    textSection.style.transform = 'translateY(0)';
+                }, 100);
+            }, 800);
+        });
+    </script>
+</body>
+</html>
