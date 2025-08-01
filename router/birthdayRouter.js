@@ -9,7 +9,7 @@ router.get("/giftbox", birthdatController.loadGiftBoxPage);
 
 router.post("/box-opened", birthdatController.boxOpen);
 
-router.get('/opened-boxes', birthdatController.getOpenedBoxes);
+// router.get('/opened-boxes', birthdatController.getOpenedBoxes);
 
 router.post('/reset-boxes', birthdatController.resetBoxes);
 
